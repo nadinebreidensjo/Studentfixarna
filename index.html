@@ -41,8 +41,8 @@
   --rose:      #C47A8A;
   --slate:     #7B95B8;
   --gold:      #D4A96A;
-  --grad:      linear-gradient(135deg, #D4785A 0%, #C47A8A 55%, #7B95B8 100%);
-  --grad2:     linear-gradient(135deg, #D4785A, #C47A8A);
+  --grad:      linear-gradient(135deg, #D4785A 0%, #C4688A 52%, #7B95B8 100%);
+  --grad2:     linear-gradient(135deg, #D4785A, #C4688A);
   --r:   12px;
   --r2:  20px;
   --rp:  50px;
@@ -208,7 +208,7 @@ nav {
   height: 500px;
   background: radial-gradient(ellipse,
     rgba(212,120,90,.13) 0%,
-    rgba(196,122,138,.08) 45%,
+    rgba(196,104,138,.08) 45%,
     transparent 70%);
   pointer-events: none;
 }
@@ -479,7 +479,7 @@ h2 {
   flex-shrink: 0;
 }
 .ic1 { background: rgba(212,120,90,.14); }
-.ic2 { background: rgba(196,122,138,.14); }
+.ic2 { background: rgba(196,104,138,.14); }
 .ic3 { background: rgba(123,149,184,.14); }
 
 .svc h3 {
@@ -550,7 +550,7 @@ h2 {
   font-weight: 600;
 }
 .vp-a { background: rgba(212,120,90,.14);  color: var(--accent); }
-.vp-r { background: rgba(196,122,138,.14); color: var(--rose); }
+.vp-r { background: rgba(196,104,138,.14); color: var(--rose); }
 .vp-s { background: rgba(123,149,184,.14); color: var(--slate); }
 
 .venue-feature-grid {
@@ -690,7 +690,7 @@ h2 {
   flex-shrink: 0;
 }
 .rav1 { background: rgba(212,120,90,.18);  color: var(--accent); }
-.rav2 { background: rgba(196,122,138,.18); color: var(--rose); }
+.rav2 { background: rgba(196,104,138,.18); color: var(--rose); }
 .rav3 { background: rgba(123,149,184,.18); color: var(--slate); }
 .rav4 { background: rgba(212,169,106,.18); color: var(--gold); }
 
@@ -978,9 +978,176 @@ footer p { font-size: 12px; color: var(--muted); }
   h1 { font-size: clamp(1.4rem, 9vw, 1.75rem); }
   .hero-pill { font-size: 10px; }
 }
+
+
+/* Big soft orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  animation: orbFloat var(--dur, 10s) ease-in-out infinite;
+  animation-delay: var(--dl, 0s);
+}
+@keyframes orbFloat {
+  0%,100% { opacity: var(--o1, .15); transform: translate(0,0) scale(1); }
+  50%      { opacity: var(--o2, .25); transform: translate(var(--mx,0px), var(--my,0px)) scale(var(--sc,1.15)); }
+}
+
+/* Small glow pulses */
+.glow-dot {
+  position: absolute;
+  border-radius: 50%;
+  animation: glowPulse var(--gd, 3s) ease-in-out infinite;
+  animation-delay: var(--gdl, 0s);
+}
+@keyframes glowPulse {
+  0%,100% { opacity: var(--go1, .08); transform: scale(1); }
+  50%      { opacity: var(--go2, .22); transform: scale(1.3); }
+}
+
+/* Sweeping strobe beams */
+.strobe {
+  position: absolute;
+  top: 0; bottom: 0;
+  animation: strobeMove var(--sd, 5s) cubic-bezier(.4,0,.2,1) infinite;
+  animation-delay: var(--sdl, 0s);
+  pointer-events: none;
+}
+@keyframes strobeMove {
+  0%   { left: -20%; opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { left: 120%; opacity: 0; }
+}
+
+
+
+
+/* ============================================================
+   LIGHT EFFECTS
+   ============================================================ */
+
+/* Hero strobe + orbs */
+.hero-lights {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  animation: orbFloat var(--dur,10s) ease-in-out infinite;
+  animation-delay: var(--dl,0s);
+}
+@keyframes orbFloat {
+  0%,100% { opacity:var(--o1,.18); transform:translate(0,0) scale(1); }
+  50%      { opacity:var(--o2,.30); transform:translate(var(--mx,0px),var(--my,0px)) scale(var(--sc,1.2)); }
+}
+
+.hero-strobe {
+  position: absolute;
+  top: 0; bottom: 0;
+  animation: strobeMove var(--sd,6s) cubic-bezier(.4,0,.2,1) infinite;
+  animation-delay: var(--sdl,0s);
+  pointer-events: none;
+}
+@keyframes strobeMove {
+  0%   { left:-20%; opacity:0; }
+  8%   { opacity:1; }
+  92%  { opacity:1; }
+  100% { left:120%; opacity:0; }
+}
+
+/* Hero content sits above lights */
+.hero-content { position:relative; z-index:1; }
+
+/* Page-wide background orbs – fixed, no strobe */
+.page-lights {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.page-orb {
+  position: absolute;
+  border-radius: 50%;
+  animation: orbFloat var(--dur,12s) ease-in-out infinite;
+  animation-delay: var(--dl,0s);
+}
+
+/* Glow dots */
+.glow-dot {
+  position: absolute;
+  border-radius: 50%;
+  animation: glowPulse var(--gd,4s) ease-in-out infinite;
+  animation-delay: var(--gdl,0s);
+}
+@keyframes glowPulse {
+  0%,100% { opacity:var(--go1,.07); transform:scale(1); }
+  50%      { opacity:var(--go2,.20); transform:scale(1.3); }
+}
+
+/* All sections above page lights */
+nav, .mobile-menu, section, footer, .strip,
+#kontakt > .contact-inner, .contact-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero needs relative for its own light layer */
+.hero { position: relative; overflow: hidden; }
+
+/* TRANSPARENT CARDS – light shines through */
+.svc       { background: rgba(44,39,32,.70) !important; backdrop-filter:blur(6px); }
+.stat      { background: rgba(44,39,32,.70) !important; backdrop-filter:blur(6px); }
+.review    { background: rgba(44,39,32,.70) !important; backdrop-filter:blur(6px); }
+.venue-card    { background: rgba(44,39,32,.70) !important; backdrop-filter:blur(6px); }
+.venue-feature { background: rgba(44,39,32,.70) !important; backdrop-filter:blur(6px); }
+.pcard         { background: rgba(44,39,32,.70) !important; backdrop-filter:blur(6px); }
+.form-card     { background: rgba(44,39,32,.80) !important; backdrop-filter:blur(8px); }
+.callout       { background: rgba(44,39,32,.70) !important; backdrop-filter:blur(6px); }
+.step-num      { position:relative; z-index:1; }
+
 </style>
 </head>
 <body>
+<!-- PAGE BACKGROUND LIGHTS (no strobe – full page) -->
+<div class="page-lights" aria-hidden="true">
+  <div class="page-orb" style="width:420px;height:420px;background:radial-gradient(circle,rgba(212,120,90,.85) 0%,transparent 65%);top:5vh;left:-80px;filter:blur(65px);--dur:13s;--dl:0s;--o1:.14;--o2:.24;--mx:60px;--my:80px;--sc:1.15"></div>
+  <div class="page-orb" style="width:380px;height:380px;background:radial-gradient(circle,rgba(196,104,138,.85) 0%,transparent 65%);top:10vh;right:-60px;filter:blur(60px);--dur:11s;--dl:1s;--o1:.12;--o2:.22;--mx:-70px;--my:60px;--sc:1.2"></div>
+  <div class="page-orb" style="width:340px;height:340px;background:radial-gradient(circle,rgba(123,149,184,.85) 0%,transparent 65%);top:40vh;left:30%;filter:blur(55px);--dur:10s;--dl:1.5s;--o1:.11;--o2:.20;--mx:40px;--my:-50px;--sc:1.15"></div>
+  <div class="page-orb" style="width:360px;height:360px;background:radial-gradient(circle,rgba(212,120,90,.85) 0%,transparent 65%);top:65vh;left:-50px;filter:blur(58px);--dur:14s;--dl:2s;--o1:.13;--o2:.22;--mx:70px;--my:-40px;--sc:1.1"></div>
+  <div class="page-orb" style="width:320px;height:320px;background:radial-gradient(circle,rgba(196,104,138,.85) 0%,transparent 65%);top:80vh;right:-40px;filter:blur(52px);--dur:12s;--dl:3s;--o1:.13;--o2:.24;--mx:-60px;--my:-30px;--sc:1.1"></div>
+  <div class="page-orb" style="width:300px;height:300px;background:radial-gradient(circle,rgba(123,149,184,.85) 0%,transparent 65%);top:120vh;left:45%;filter:blur(50px);--dur:11s;--dl:2.5s;--o1:.11;--o2:.20;--mx:-40px;--my:50px;--sc:1.15"></div>
+  <div class="page-orb" style="width:280px;height:280px;background:radial-gradient(circle,rgba(212,120,90,.85) 0%,transparent 65%);top:150vh;right:15%;filter:blur(48px);--dur:13s;--dl:1s;--o1:.12;--o2:.22;--mx:50px;--my:-50px;--sc:1.1"></div>
+
+  <div class="glow-dot" style="width:50px;height:50px;background:radial-gradient(circle,rgba(212,120,90,.9),transparent);top:15%;left:18%;filter:blur(12px);--gd:4s;--gdl:0s;--go1:.09;--go2:.24"></div>
+  <div class="glow-dot" style="width:42px;height:42px;background:radial-gradient(circle,rgba(196,104,138,.9),transparent);top:28%;left:75%;filter:blur(10px);--gd:3.5s;--gdl:.6s;--go1:.09;--go2:.22"></div>
+  <div class="glow-dot" style="width:38px;height:38px;background:radial-gradient(circle,rgba(123,149,184,.9),transparent);top:50%;left:6%;filter:blur(9px);--gd:5s;--gdl:1s;--go1:.07;--go2:.20"></div>
+  <div class="glow-dot" style="width:45px;height:45px;background:radial-gradient(circle,rgba(212,120,90,.9),transparent);top:68%;left:88%;filter:blur(11px);--gd:3.8s;--gdl:1.5s;--go1:.09;--go2:.24"></div>
+  <div class="glow-dot" style="width:40px;height:40px;background:radial-gradient(circle,rgba(196,104,138,.9),transparent);top:85%;left:40%;filter:blur(10px);--gd:4.5s;--gdl:.8s;--go1:.07;--go2:.22"></div>
+</div>
+
+
+  <!-- Small glow dots scattered -->
+  <div class="glow-dot" style="width:55px;height:55px;background:radial-gradient(circle,rgba(212,120,90,.9),transparent);top:8%;left:18%;filter:blur(12px);--gd:4s;--gdl:0s;--go1:.10;--go2:.28"></div>
+  <div class="glow-dot" style="width:45px;height:45px;background:radial-gradient(circle,rgba(196,104,138,.9),transparent);top:18%;left:70%;filter:blur(10px);--gd:3.5s;--gdl:.6s;--go1:.10;--go2:.26"></div>
+  <div class="glow-dot" style="width:40px;height:40px;background:radial-gradient(circle,rgba(123,149,184,.9),transparent);top:35%;left:8%;filter:blur(9px);--gd:5s;--gdl:1s;--go1:.08;--go2:.22"></div>
+  <div class="glow-dot" style="width:50px;height:50px;background:radial-gradient(circle,rgba(212,120,90,.9),transparent);top:50%;left:85%;filter:blur(11px);--gd:3.8s;--gdl:1.5s;--go1:.10;--go2:.28"></div>
+  <div class="glow-dot" style="width:42px;height:42px;background:radial-gradient(circle,rgba(196,104,138,.9),transparent);top:65%;left:35%;filter:blur(10px);--gd:4.5s;--gdl:.8s;--go1:.08;--go2:.24"></div>
+  <div class="glow-dot" style="width:48px;height:48px;background:radial-gradient(circle,rgba(123,149,184,.9),transparent);top:80%;left:72%;filter:blur(10px);--gd:3.2s;--gdl:2s;--go1:.10;--go2:.26"></div>
+  <div class="glow-dot" style="width:38px;height:38px;background:radial-gradient(circle,rgba(212,120,90,.9),transparent);top:92%;left:14%;filter:blur(9px);--gd:4.2s;--gdl:.3s;--go1:.08;--go2:.22"></div>
+
+  <!-- Sweeping strobe beams – 3 at different speeds/colors -->
+  <div class="strobe" style="width:110px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),rgba(255,255,255,.13),rgba(255,255,255,.06),transparent);--sd:6s;--sdl:0s"></div>
+  <div class="strobe" style="width:70px;background:linear-gradient(90deg,transparent,rgba(212,120,90,.10),rgba(255,255,255,.09),rgba(196,104,138,.08),transparent);--sd:8s;--sdl:2s"></div>
+  <div class="strobe" style="width:50px;background:linear-gradient(90deg,transparent,rgba(123,149,184,.14),rgba(255,255,255,.07),transparent);--sd:10s;--sdl:5s"></div>
+
+</div>
+
 
 <!-- NAV -->
 <nav>
@@ -1007,12 +1174,24 @@ footer p { font-size: 12px; color: var(--muted); }
 
 <!-- HERO -->
 <section class="hero">
+  <!-- Hero-only orbs + strobe -->
+  <div class="hero-lights" aria-hidden="true">
+    <div class="hero-orb" style="width:300px;height:300px;background:radial-gradient(circle,rgba(212,120,90,.9) 0%,transparent 65%);top:-80px;left:-60px;filter:blur(50px);--dur:9s;--dl:0s;--o1:.20;--o2:.35;--mx:50px;--my:60px;--sc:1.2"></div>
+    <div class="hero-orb" style="width:280px;height:280px;background:radial-gradient(circle,rgba(196,104,138,.9) 0%,transparent 65%);top:-60px;right:-50px;filter:blur(48px);--dur:8s;--dl:1s;--o1:.18;--o2:.32;--mx:-60px;--my:50px;--sc:1.2"></div>
+    <div class="hero-orb" style="width:240px;height:240px;background:radial-gradient(circle,rgba(123,149,184,.9) 0%,transparent 65%);bottom:-40px;left:40%;filter:blur(45px);--dur:10s;--dl:1.5s;--o1:.16;--o2:.28;--mx:30px;--my:-30px;--sc:1.15"></div>
+    <div class="hero-strobe" style="width:110px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),rgba(255,255,255,.13),rgba(255,255,255,.06),transparent);--sd:6s;--sdl:0s"></div>
+    <div class="hero-strobe" style="width:70px;background:linear-gradient(90deg,transparent,rgba(212,120,90,.10),rgba(255,255,255,.09),rgba(196,104,138,.08),transparent);--sd:8s;--sdl:2s"></div>
+    <div class="hero-strobe" style="width:50px;background:linear-gradient(90deg,transparent,rgba(123,149,184,.14),rgba(255,255,255,.07),transparent);--sd:10s;--sdl:5s"></div>
+  </div>
+  <!-- Hero content -->
+  <div class="hero-content">
   <div class="hero-pill"><span class="hero-dot"></span>Studentfixarna – Stockholm</div>
   <h1>En grym student.<span class="grad-text">Klasskassan tackar.</span></h1>
   <p class="hero-sub">Vi tar hand om allt. Ni behåller pengarna. Så enkelt är det.</p>
   <div class="btns">
     <a href="#kontakt" class="btn-main">Kom igång</a>
     <a href="#hur" class="btn-sec">Hur funkar det?</a>
+  </div>
   </div>
 </section>
 
@@ -1063,7 +1242,7 @@ Hos många andra bolag tjänar de mer när ni säljer mer – hos oss tjänar ni
 <section id="tjanster" class="bg-alt">
   <div class="inner">
     <div class="sec-label">Vad vi fixar</div>
-    <h2>Allt du drömmer om.</h2>
+    <h2>Allt ni behöver. Inget ni inte behöver.</h2>
     <div class="services-grid">
       <div class="svc">
         <div class="svc-icon ic1">🎓</div>
