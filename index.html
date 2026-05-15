@@ -6,195 +6,933 @@
 <title>Studentfixarna – Studentfesten på dina villkor</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#09090b;
-  --surface:#111116;
-  --surface2:#18181f;
-  --border:rgba(255,255,255,0.08);
-  --border2:rgba(255,255,255,0.18);
-  --text:#f4f4f5;
-  --muted:#71717a;
-  --muted2:#a1a1aa;
-  --gold:#E8C547;
-  --pink:#E8479A;
-  --blue:#5B8DEF;
-  --grad:linear-gradient(135deg,#E8C547 0%,#E8479A 50%,#5B8DEF 100%);
-  --grad2:linear-gradient(135deg,#E8C547,#E8479A);
-  --r:14px;
-  --r2:24px;
+/* ============================================================
+   RESET & TOKENS
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Warm dark palette – grafit with mocha undertone */
+  --bg:        #1E1B18;   /* main bg – deep warm charcoal */
+  --bg2:       #252118;   /* slightly warmer dark */
+  --surface:   #2C2720;   /* card/panel surface */
+  --surface2:  #332D25;   /* elevated surface */
+
+  --border:    rgba(255,240,220,0.08);
+  --border2:   rgba(255,240,220,0.14);
+  --border3:   rgba(255,240,220,0.22);
+
+  --text:      #F5EFE6;   /* warm off-white */
+  --text2:     #C9BFB2;   /* secondary text */
+  --muted:     #8C8077;   /* muted text */
+  --muted2:    #5E5650;   /* very muted */
+
+  /* Accent – softer, warmer than before */
+  --accent:    #D4785A;   /* warm terracotta */
+  --rose:      #C47A8A;   /* dusty rose */
+  --slate:     #7B95B8;   /* soft slate blue */
+  --gold:      #D4A96A;   /* warm sand gold */
+
+  --grad:      linear-gradient(135deg, #D4785A 0%, #C47A8A 55%, #7B95B8 100%);
+  --grad2:     linear-gradient(135deg, #D4785A, #C47A8A);
+
+  --r:   12px;
+  --r2:  20px;
+  --rp:  50px;
+
+  --shadow-sm: 0 1px 4px rgba(0,0,0,.25);
+  --shadow:    0 4px 20px rgba(0,0,0,.30);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.40);
 }
-html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.65}
 
-/* NAV */
-nav{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2.5rem;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(9,9,11,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.nav-logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.02em;text-decoration:none}
-.nav-links{display:flex;gap:1.75rem;list-style:none}
-.nav-links a{color:var(--muted2);text-decoration:none;font-size:13.5px;font-weight:500;transition:color .2s}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{background:var(--grad);color:#09090b !important;padding:.4rem 1.1rem;border-radius:50px;font-weight:600 !important}
-.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-.nav-burger span{display:block;width:22px;height:2px;background:var(--muted2);border-radius:2px}
-.mobile-menu{display:none;flex-direction:column;gap:0;background:var(--surface);border-bottom:1px solid var(--border)}
-.mobile-menu a{display:block;padding:1rem 2rem;color:var(--muted2);text-decoration:none;font-size:14px;font-weight:500;border-bottom:1px solid var(--border)}
-.mobile-menu a:last-child{border-bottom:none;color:#09090b;background:var(--grad);font-weight:600}
+html { scroll-behavior: smooth; }
 
-/* HERO */
-.hero{padding:6rem 2.5rem 5rem;text-align:center;position:relative;overflow:hidden}
-.hero-glow{position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(232,197,71,.16) 0%,rgba(232,71,154,.10) 40%,transparent 70%);pointer-events:none}
-.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid var(--border2);border-radius:50px;padding:.35rem 1rem .35rem .5rem;font-size:12.5px;font-weight:500;color:var(--muted2);margin-bottom:1.75rem}
-.hero-dot{width:8px;height:8px;border-radius:50%;background:var(--grad);display:inline-block}
-h1{font-family:'Syne',sans-serif;font-size:clamp(2.6rem,7vw,4.4rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;color:var(--text);margin-bottom:1.25rem}
-h1 .grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:1.1rem;color:var(--muted2);max-width:500px;margin:0 auto 2.5rem;line-height:1.75}
-.btns{display:flex;gap:.85rem;justify-content:center;flex-wrap:wrap}
-.btn-main{background:var(--grad);color:#09090b;border:none;padding:.85rem 2.2rem;border-radius:50px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:opacity .15s,transform .15s;text-decoration:none;display:inline-block}
-.btn-main:hover{opacity:.88;transform:translateY(-2px)}
-.btn-sec{background:transparent;color:var(--text);border:1px solid var(--border2);padding:.85rem 2.2rem;border-radius:50px;font-size:14.5px;font-weight:500;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:border-color .2s;text-decoration:none;display:inline-block}
-.btn-sec:hover{border-color:rgba(255,255,255,.3)}
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
 
-/* STRIP */
-.strip{display:flex;justify-content:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.strip-item{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:1.1rem;font-size:13px;font-weight:500;color:var(--muted2);border-right:1px solid var(--border)}
-.strip-item:last-child{border-right:none}
-.strip-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.strip-dot.gold{background:var(--gold)}
-.strip-dot.pink{background:var(--pink)}
-.strip-dot.blue{background:var(--blue)}
-.strip-dot.white{background:rgba(255,255,255,.5)}
+/* ============================================================
+   NAV
+   ============================================================ */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: rgba(30,27,24,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
 
-/* SHARED */
-section{padding:5rem 2.5rem}
-.sec-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
-h2{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;line-height:1.12;letter-spacing:-0.025em;color:var(--text);margin-bottom:.85rem}
-.inner{max-width:940px;margin:0 auto}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  flex-shrink: 0;
+}
 
-/* PITCH */
-.pitch{text-align:center}
-.pitch-sub{color:var(--muted2);max-width:520px;margin:0 auto 3rem;font-size:1rem;line-height:1.75}
-.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:2.5rem}
-.stat{background:var(--surface);padding:2rem 1.25rem;text-align:center}
-.stat-num{font-family:'Syne',sans-serif;font-size:2.6rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:.4rem}
-.stat p{font-size:13px;color:var(--muted);line-height:1.5}
-.callout{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r);padding:1.75rem 2rem;display:flex;gap:1.25rem;align-items:flex-start;max-width:680px;margin:0 auto}
-.callout-bar{width:3px;min-width:3px;border-radius:3px;background:var(--grad2);align-self:stretch}
-.callout h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
-.callout p{font-size:13.5px;color:var(--muted2);line-height:1.65}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
 
-/* SERVICES */
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;margin-top:2.5rem}
-.svc{background:var(--surface);padding:1.75rem;transition:background .2s}
-.svc:hover{background:var(--surface2)}
-.svc-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:20px}
-.svc-icon.g1{background:rgba(232,197,71,.12)}
-.svc-icon.g2{background:rgba(232,71,154,.12)}
-.svc-icon.g3{background:rgba(91,141,239,.12)}
-.svc h3{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.4rem}
-.svc p{font-size:13px;color:var(--muted);line-height:1.6}
-.svc-tag{display:inline-block;margin-top:.75rem;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.2rem .65rem;border-radius:50px;background:rgba(255,255,255,.06);color:var(--muted2)}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--text); }
 
-/* VENUES */
-.venue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2rem}
-.venue-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem 1.25rem;transition:border-color .2s,transform .2s}
-.venue-card:hover{border-color:rgba(232,197,71,.35);transform:translateY(-3px)}
-.venue-emoji{font-size:1.6rem;margin-bottom:.6rem;display:block}
-.venue-card h3{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.25rem}
-.venue-card p{font-size:12.5px;color:var(--muted);line-height:1.5}
-.venue-pill{display:inline-block;margin-top:.6rem;font-size:11px;padding:.2rem .6rem;border-radius:50px;font-weight:600}
-.venue-pill.gold{background:rgba(232,197,71,.12);color:var(--gold)}
-.venue-pill.pink{background:rgba(232,71,154,.12);color:var(--pink)}
-.venue-pill.blue{background:rgba(91,141,239,.12);color:var(--blue)}
+.nav-cta {
+  background: var(--grad) !important;
+  color: #fff !important;
+  padding: .42rem 1.15rem;
+  border-radius: var(--rp);
+  font-weight: 600 !important;
+  color: var(--bg) !important;
+  transition: opacity .15s, transform .15s !important;
+}
+.nav-cta:hover { opacity: .88 !important; transform: translateY(-1px) !important; }
 
-/* REVIEWS */
-.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:2rem}
-.review{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem}
-.review-stars{display:flex;gap:3px;margin-bottom:.85rem}
-.star{width:14px;height:14px;background:var(--gold);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);display:inline-block}
-.review q{font-size:13.5px;color:var(--muted2);line-height:1.65;font-style:italic;display:block;margin-bottom:1rem}
-.review-author{display:flex;align-items:center;gap:10px}
-.review-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;flex-shrink:0}
-.av1{background:rgba(232,197,71,.18);color:var(--gold)}
-.av2{background:rgba(232,71,154,.18);color:var(--pink)}
-.av3{background:rgba(91,141,239,.18);color:var(--blue)}
-.av4{background:rgba(232,197,71,.12);color:var(--gold)}
-.review-name{font-size:13px;font-weight:600;color:var(--text)}
-.review-meta{font-size:12px;color:var(--muted)}
+/* Hamburger */
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  border: none;
+  background: transparent;
+}
+.nav-burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text2);
+  border-radius: 2px;
+  transition: transform .25s, opacity .25s;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* HOW */
-.steps{display:flex;flex-direction:column;gap:0;margin-top:2rem;max-width:640px}
-.step{display:flex;gap:1.25rem;align-items:flex-start;padding-bottom:2rem;position:relative}
-.step:not(:last-child)::after{content:'';position:absolute;left:15px;top:36px;bottom:0;width:1px;background:var(--border2)}
-.step-num{width:32px;height:32px;min-width:32px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;color:#09090b;position:relative;z-index:1}
-.step-body{padding-top:.2rem}
-.step-body h3{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
-.step-body p{font-size:13.5px;color:var(--muted);line-height:1.65}
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 57px;
+  z-index: 199;
+  box-shadow: var(--shadow);
+}
+.mobile-menu a {
+  display: block;
+  padding: .9rem 2rem;
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+  transition: background .15s;
+}
+.mobile-menu a:hover { background: var(--surface2); }
+.mobile-menu a.cta-mob {
+  background: var(--grad);
+  color: var(--bg);
+  font-weight: 700;
+  border-bottom: none;
+  text-align: center;
+}
+.mobile-menu.open { display: flex; }
 
-/* PRICING */
-.pricing-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;max-width:700px;margin:2rem auto}
-.pcard{background:var(--surface);padding:2rem 1.25rem;text-align:center}
-.pcard-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem}
-.pcard-val{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.35rem}
-.pcard p{font-size:12.5px;color:var(--muted);line-height:1.5}
-.pricing-note{font-size:13px;color:var(--muted);max-width:440px;margin:1.5rem auto 0;text-align:center}
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  padding: 5.5rem 1.5rem 5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
 
-/* CONTACT FORM */
-.contact-section{padding:5rem 2.5rem}
-.contact-inner{max-width:620px;margin:0 auto;text-align:center}
-.contact-inner > p{color:var(--muted2);font-size:1rem;line-height:1.75;margin-bottom:2.5rem}
-.form-card{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:2.5rem 2rem;text-align:left}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.field{display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.1rem}
-.field:last-child{margin-bottom:0}
-label{font-size:12.5px;font-weight:600;color:var(--muted2);letter-spacing:.02em}
-.req{color:var(--pink);margin-left:2px}
-input,select,textarea{background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;padding:.72rem 1rem;transition:border-color .2s,box-shadow .2s;outline:none;width:100%;-webkit-appearance:none;appearance:none}
-input::placeholder,textarea::placeholder{color:var(--muted)}
-input:focus,select:focus,textarea:focus{border-color:rgba(232,71,154,.5);box-shadow:0 0 0 3px rgba(232,71,154,.1)}
-textarea{resize:vertical;min-height:110px;line-height:1.6}
-.checkboxes{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.2rem}
-.checkbox-item{display:flex;align-items:center;gap:.5rem;cursor:pointer}
-.checkbox-item input[type=checkbox]{width:18px;height:18px;min-width:18px;border-radius:5px;cursor:pointer;accent-color:var(--pink);padding:0}
-.checkbox-item span{font-size:13px;color:var(--muted2)}
-.divider{height:1px;background:var(--border);margin:1.4rem 0}
-.submit-btn{width:100%;background:var(--grad);border:none;border-radius:50px;color:#09090b;font-family:'Syne',sans-serif;font-size:15px;font-weight:800;padding:1rem 2rem;cursor:pointer;transition:opacity .15s,transform .15s;margin-top:1.5rem;letter-spacing:.01em}
-.submit-btn:hover{opacity:.88;transform:translateY(-1px)}
-.privacy{text-align:center;margin-top:1rem;font-size:12px;color:var(--muted);line-height:1.6}
-.success-msg{display:none;text-align:center;padding:3rem 1rem}
-.success-icon{width:64px;height:64px;border-radius:50%;background:rgba(232,197,71,.12);border:1px solid rgba(232,197,71,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:28px}
-.success-msg h3{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--text);margin-bottom:.5rem}
-.success-msg p{font-size:14px;color:var(--muted2);line-height:1.7}
-.error-border{border-color:rgba(232,71,154,.7) !important}
+/* Subtle warm glow */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 500px;
+  background: radial-gradient(ellipse,
+    rgba(212,120,90,.13) 0%,
+    rgba(196,122,138,.08) 45%,
+    transparent 70%);
+  pointer-events: none;
+}
 
-/* FOOTER */
-footer{background:var(--surface);border-top:1px solid var(--border);padding:2.5rem;text-align:center}
-.footer-logo{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.4rem}
-footer p{font-size:12px;color:var(--muted)}
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,240,220,0.06);
+  border: 1px solid var(--border2);
+  border-radius: var(--rp);
+  padding: .32rem .9rem .32rem .5rem;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+}
 
-/* RESPONSIVE */
-@media(max-width:768px){
-  nav{padding:.9rem 1.5rem}
-  .nav-links{display:none}
-  .nav-burger{display:flex}
-  section{padding:3.5rem 1.5rem}
-  .hero{padding:4rem 1.5rem 3.5rem}
-  .strip{flex-wrap:wrap}
-  .strip-item{min-width:50%;border-bottom:1px solid var(--border)}
-  .stat-row{grid-template-columns:1fr}
-  .services-grid{grid-template-columns:1fr}
-  .form-row{grid-template-columns:1fr}
-  .checkboxes{grid-template-columns:1fr}
-  .pricing-cards{grid-template-columns:1fr}
-  .callout{flex-direction:column}
-  .contact-section{padding:3.5rem 1.5rem}
-  .form-card{padding:1.5rem 1.25rem}
-  footer{padding:2rem 1.5rem}
+.hero-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--grad);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 9vw, 4rem);
+  font-weight: 800;
+  line-height: 1.07;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.grad-text {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text2);
+  max-width: 460px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.75;
+}
+
+.btns {
+  display: flex;
+  gap: .75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-main {
+  background: var(--grad);
+  color: #fff;
+  border: none;
+  padding: .85rem 2.1rem;
+  border-radius: var(--rp);
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: opacity .15s, transform .15s, box-shadow .15s;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 18px rgba(212,120,90,.28);
+}
+.btn-main:hover { opacity: .88; transform: translateY(-2px); }
+
+.btn-sec {
+  background: transparent;
+  color: var(--text2);
+  border: 1.5px solid var(--border3);
+  padding: .85rem 2.1rem;
+  border-radius: var(--rp);
+  font-size: 14.5px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: border-color .2s, color .2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-sec:hover { border-color: var(--accent); color: var(--text); }
+
+/* ============================================================
+   STRIP
+   ============================================================ */
+.strip {
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.strip-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: .95rem 1.25rem;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+  border-right: 1px solid var(--border);
+  flex: 1;
+  min-width: 140px;
+}
+.strip-item:last-child { border-right: none; }
+
+.strip-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.sd-a { background: var(--accent); }
+.sd-r { background: var(--rose); }
+.sd-s { background: var(--slate); }
+.sd-g { background: var(--gold); }
+
+/* ============================================================
+   SHARED
+   ============================================================ */
+section { padding: 5rem 1.5rem; }
+
+.sec-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .5rem;
+}
+
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin-bottom: .9rem;
+}
+
+.inner { max-width: 960px; margin: 0 auto; }
+
+.bg-alt { background: var(--bg2); }
+
+/* ============================================================
+   PITCH
+   ============================================================ */
+.pitch { text-align: center; }
+
+.pitch-sub {
+  color: var(--text2);
+  max-width: 520px;
+  margin: 0 auto 3rem;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: .4rem;
+}
+
+.stat p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+.callout {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 1.75rem;
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  max-width: 680px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+}
+
+.callout-bar {
+  width: 3px;
+  min-width: 3px;
+  border-radius: 3px;
+  background: var(--grad2);
+  align-self: stretch;
+  min-height: 40px;
+}
+
+.callout h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .3rem;
+}
+
+.callout p { font-size: 13.5px; color: var(--text2); line-height: 1.65; }
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.svc {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 1.75rem 1.5rem;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+  box-shadow: var(--shadow-sm);
+}
+.svc:hover { border-color: var(--border3); box-shadow: var(--shadow); transform: translateY(-3px); }
+
+.svc-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 20px;
+}
+.ic1 { background: rgba(212,120,90,.14); }
+.ic2 { background: rgba(196,122,138,.14); }
+.ic3 { background: rgba(123,149,184,.14); }
+
+.svc h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: .92rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .4rem;
+}
+
+.svc p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+.svc-tag {
+  display: inline-block;
+  margin-top: .75rem;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: .22rem .65rem;
+  border-radius: var(--rp);
+  background: rgba(255,240,220,.05);
+  color: var(--muted);
+  border: 1px solid var(--border2);
+}
+
+/* ============================================================
+   VENUES
+   ============================================================ */
+.venue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.venue-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 1.5rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+.venue-card:hover { border-color: rgba(212,120,90,.4); transform: translateY(-3px); box-shadow: var(--shadow); }
+
+.venue-emoji { font-size: 1.6rem; margin-bottom: .6rem; display: block; }
+
+.venue-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .25rem;
+}
+
+.venue-card p { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+.venue-pill {
+  display: inline-block;
+  margin-top: .6rem;
+  font-size: 11px;
+  padding: .2rem .65rem;
+  border-radius: var(--rp);
+  font-weight: 600;
+}
+.vp-a { background: rgba(212,120,90,.14);  color: var(--accent); }
+.vp-r { background: rgba(196,122,138,.14); color: var(--rose); }
+.vp-s { background: rgba(123,149,184,.14); color: var(--slate); }
+
+/* ============================================================
+   REVIEWS
+   ============================================================ */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.review {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+}
+
+.review-stars { display: flex; gap: 3px; }
+
+.star {
+  width: 13px;
+  height: 13px;
+  background: var(--gold);
+  clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  display: inline-block;
+}
+
+.review q {
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.7;
+  font-style: italic;
+  display: block;
+  flex: 1;
+}
+
+.review-author { display: flex; align-items: center; gap: 10px; }
+
+.review-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.rav1 { background: rgba(212,120,90,.18);  color: var(--accent); }
+.rav2 { background: rgba(196,122,138,.18); color: var(--rose); }
+.rav3 { background: rgba(123,149,184,.18); color: var(--slate); }
+.rav4 { background: rgba(212,169,106,.18); color: var(--gold); }
+
+.review-name  { font-size: 13px; font-weight: 600; color: var(--text); }
+.review-meta  { font-size: 12px; color: var(--muted); }
+
+/* ============================================================
+   HOW IT WORKS
+   ============================================================ */
+.steps {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2.25rem;
+  max-width: 600px;
+}
+
+.step {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding-bottom: 2rem;
+  position: relative;
+}
+
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 34px;
+  bottom: 0;
+  width: 1px;
+  background: var(--border2);
+}
+
+.step-num {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  background: var(--grad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: .82rem;
+  font-weight: 800;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 2px 10px rgba(212,120,90,.30);
+}
+
+.step-body { padding-top: .2rem; }
+
+.step-body h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .3rem;
+}
+
+.step-body p { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 700px;
+  margin: 2rem auto 0;
+}
+
+.pcard {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.pcard-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .6rem;
+}
+
+.pcard-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: .35rem;
+}
+
+.pcard p { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+.pricing-note {
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 440px;
+  margin: 1.5rem auto 0;
+  text-align: center;
+  line-height: 1.65;
+}
+
+/* ============================================================
+   CONTACT FORM
+   ============================================================ */
+.contact-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-intro {
+  color: var(--text2);
+  font-size: .98rem;
+  line-height: 1.75;
+  margin-bottom: 2.25rem;
+}
+
+.form-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r2);
+  padding: 2.25rem 2rem;
+  text-align: left;
+  box-shadow: var(--shadow);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: .42rem;
+  margin-bottom: 1rem;
+}
+
+label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text2);
+}
+
+.req { color: var(--accent); margin-left: 2px; }
+
+input[type=text],
+input[type=email],
+input[type=tel],
+textarea {
+  background: var(--surface2);
+  border: 1.5px solid var(--border2);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  padding: .7rem .95rem;
+  transition: border-color .2s, box-shadow .2s;
+  outline: none;
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input::placeholder, textarea::placeholder { color: var(--muted2); }
+
+input:focus, textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(212,120,90,.15);
+}
+
+.input-error {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(212,120,90,.15) !important;
+}
+
+textarea { resize: vertical; min-height: 105px; line-height: 1.6; }
+
+.checkboxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+  margin-top: .25rem;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  cursor: pointer;
+}
+
+.checkbox-item input[type=checkbox] {
+  width: 17px;
+  height: 17px;
+  min-width: 17px;
+  border-radius: 5px;
+  cursor: pointer;
+  accent-color: var(--accent);
+  padding: 0;
+  border: none;
+  background: var(--surface2);
+}
+
+.checkbox-item span { font-size: 13.5px; color: var(--text2); }
+
+.divider { height: 1px; background: var(--border2); margin: 1.25rem 0; }
+
+.submit-btn {
+  width: 100%;
+  background: var(--grad);
+  border: none;
+  border-radius: var(--rp);
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  padding: .95rem 2rem;
+  cursor: pointer;
+  transition: opacity .15s, transform .15s;
+  margin-top: 1.25rem;
+  letter-spacing: .01em;
+  box-shadow: 0 4px 18px rgba(212,120,90,.28);
+}
+.submit-btn:hover { opacity: .88; transform: translateY(-1px); }
+
+.privacy {
+  text-align: center;
+  margin-top: .85rem;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.success-msg {
+  display: none;
+  text-align: center;
+  padding: 2.5rem 1rem;
+}
+
+.success-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(212,120,90,.12);
+  border: 1.5px solid rgba(212,120,90,.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.1rem;
+  font-size: 24px;
+  color: var(--accent);
+}
+
+.success-msg h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: .45rem;
+}
+
+.success-msg p { font-size: 14px; color: var(--text2); line-height: 1.7; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: .35rem;
+}
+
+footer p { font-size: 12px; color: var(--muted); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .nav-links  { display: none; }
+  .nav-burger { display: flex; }
+  nav         { padding: .85rem 1.25rem; }
+
+  .hero        { padding: 3.25rem 1.25rem 2.75rem; }
+  h1           { font-size: clamp(1.75rem, 10vw, 2.5rem); letter-spacing: -0.02em; line-height: 1.1; }
+  .hero-sub    { font-size: .95rem; }
+  .btns        { flex-direction: column; align-items: center; }
+  .btn-main,
+  .btn-sec     { width: 100%; max-width: 300px; text-align: center; }
+
+  .strip-item  { min-width: 50%; flex: 0 0 50%; border-bottom: 1px solid var(--border); }
+  .strip-item:nth-child(2n) { border-right: none; }
+  .strip-item:nth-child(3),
+  .strip-item:nth-child(4)  { border-bottom: none; }
+
+  section { padding: 3rem 1.25rem; }
+
+  .stat-row      { grid-template-columns: 1fr; gap: .75rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .pricing-cards { grid-template-columns: 1fr; gap: .75rem; }
+
+  .callout       { flex-direction: column; gap: .75rem; }
+  .callout-bar   { width: 100%; height: 3px; min-height: 0; min-width: unset; }
+
+  .form-card   { padding: 1.5rem 1.1rem; }
+  .form-row    { grid-template-columns: 1fr; gap: 0; }
+  .checkboxes  { grid-template-columns: 1fr; }
+
+  h2 { font-size: clamp(1.45rem, 7vw, 2rem); }
+}
+
+@media (max-width: 380px) {
+  h1 { font-size: clamp(1.6rem, 11vw, 2rem); }
+  .hero-pill { font-size: 10px; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ============================================================
+     NAV
+     ============================================================ -->
 <nav>
   <a class="nav-logo" href="#">STUDENTFIXARNA</a>
   <ul class="nav-links">
@@ -203,22 +941,25 @@ footer p{font-size:12px;color:var(--muted)}
     <li><a href="#reviews">Omdömen</a></li>
     <li><a href="#kontakt" class="nav-cta">Boka nu</a></li>
   </ul>
-  <div class="nav-burger" onclick="toggleMenu()" aria-label="Meny">
+  <button class="nav-burger" id="burger" aria-label="Öppna meny" onclick="toggleMenu()">
     <span></span><span></span><span></span>
-  </div>
+  </button>
 </nav>
+
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#tjanster" onclick="toggleMenu()">Tjänster</a>
-  <a href="#lokaler" onclick="toggleMenu()">Lokaler</a>
-  <a href="#reviews" onclick="toggleMenu()">Omdömen</a>
-  <a href="#kontakt" onclick="toggleMenu()">Boka nu</a>
+  <a href="#tjanster" onclick="closeMenu()">Tjänster</a>
+  <a href="#lokaler"  onclick="closeMenu()">Lokaler</a>
+  <a href="#reviews"  onclick="closeMenu()">Omdömen</a>
+  <a href="#hur"      onclick="closeMenu()">Hur det funkar</a>
+  <a href="#kontakt"  onclick="closeMenu()" class="cta-mob">Boka nu</a>
 </div>
 
-<!-- HERO -->
+<!-- ============================================================
+     HERO
+     ============================================================ -->
 <section class="hero">
-  <div class="hero-glow"></div>
   <div class="hero-pill"><span class="hero-dot"></span>Studentfixarna – Stockholm</div>
-  <h1>En grym student.<br><span class="grad">Klasskassan tackar.</span></h1>
+  <h1>En grym student.<br><span class="grad-text">Klasskassan tackar.</span></h1>
   <p class="hero-sub">Vi tar hand om allt. Ni håller pengarna. Så enkelt är det.</p>
   <div class="btns">
     <a href="#kontakt" class="btn-main">Kom igång</a>
@@ -228,23 +969,36 @@ footer p{font-size:12px;color:var(--muted)}
 
 <!-- STRIP -->
 <div class="strip">
-  <div class="strip-item"><span class="strip-dot gold"></span>Fast arvode</div>
-  <div class="strip-item"><span class="strip-dot pink"></span>All biljettvinst till er</div>
-  <div class="strip-item"><span class="strip-dot blue"></span>Ni säljer inget extra</div>
-  <div class="strip-item"><span class="strip-dot white"></span>Vi fixar allt</div>
+  <div class="strip-item"><span class="strip-dot sd-a"></span>Fast arvode</div>
+  <div class="strip-item"><span class="strip-dot sd-r"></span>All biljettvinst till er</div>
+  <div class="strip-item"><span class="strip-dot sd-s"></span>Ni säljer inget extra</div>
+  <div class="strip-item"><span class="strip-dot sd-g"></span>Vi fixar allt</div>
 </div>
 
-<!-- PITCH -->
+<!-- ============================================================
+     PITCH
+     ============================================================ -->
 <section id="varfor">
   <div class="inner pitch">
     <div class="sec-label">Varför Studentfixarna</div>
     <h2>Andra bolag tjänar på er.<br>Vi gör tvärtom.</h2>
     <p class="pitch-sub">Vi startade Studentfixarna för att vi tröttnade på att studentfester mest gynnar eventbolagen. Hos oss går biljettintäkterna till klassen – inte till oss.</p>
+
     <div class="stat-row">
-      <div class="stat"><div class="stat-num">100%</div><p>Av biljettintäkterna tillbaka till er klass</p></div>
-      <div class="stat"><div class="stat-num">Fast</div><p>Arvode – ni vet priset från dag ett</p></div>
-      <div class="stat"><div class="stat-num">0 kr</div><p>Krav på att sälja tilläggsprodukter</p></div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <p>Av biljettintäkterna tillbaka till er klass</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Fast</div>
+        <p>Arvode – ni vet priset från dag ett</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">0 kr</div>
+        <p>Krav på att sälja tilläggsprodukter</p>
+      </div>
     </div>
+
     <div class="callout">
       <div class="callout-bar"></div>
       <div>
@@ -255,146 +1009,172 @@ footer p{font-size:12px;color:var(--muted)}
   </div>
 </section>
 
-<!-- SERVICES -->
-<section id="tjanster" style="background:var(--surface)">
+<!-- ============================================================
+     SERVICES
+     ============================================================ -->
+<section id="tjanster" class="bg-alt">
   <div class="inner">
     <div class="sec-label">Vad vi fixar</div>
     <h2>Allt du drömmer om.</h2>
     <div class="services-grid">
+
       <div class="svc">
-        <div class="svc-icon g1">🎉</div>
+        <div class="svc-icon ic1">🎉</div>
         <h3>Studentfesten</h3>
         <p>Rätt lokal, rätt vibe. Vi planerar hela festen – från lokal och mat till logistik och kvällens schema.</p>
         <span class="svc-tag">Populärast</span>
       </div>
+
       <div class="svc">
-        <div class="svc-icon g2">🚌</div>
+        <div class="svc-icon ic2">🚌</div>
         <h3>Flak & transport</h3>
         <p>Klassisk studentflak med rutt, dekorationer och allt koordinerat. Ni fokuserar på att ha kul.</p>
         <span class="svc-tag">Studentdagen</span>
       </div>
+
       <div class="svc">
-        <div class="svc-icon g3">☕</div>
+        <div class="svc-icon ic3">☕</div>
         <h3>Studentfrukost & catering</h3>
         <p>Frukost på studentdagen eller mat till festen – vi sköter allt så ni slipper stå med tallrikar.</p>
         <span class="svc-tag">Catering</span>
       </div>
+
       <div class="svc">
-        <div class="svc-icon g1">🏡</div>
+        <div class="svc-icon ic1">🏡</div>
         <h3>Privat studentmottagning</h3>
         <p>Planerar ni en privat mottagning för hela kullen? Vi hjälper till – minimum 100 gäster.</p>
         <span class="svc-tag">Min. 100 gäster</span>
       </div>
+
       <div class="svc">
-        <div class="svc-icon g2">📅</div>
+        <div class="svc-icon ic2">📅</div>
         <h3>Hela studentdagen</h3>
         <p>Flak, frukost, middag och fest i ett paket. Ett ställe att hålla koll på – vi har resten.</p>
         <span class="svc-tag">Hela paketet</span>
       </div>
+
       <div class="svc">
-        <div class="svc-icon g3">✨</div>
+        <div class="svc-icon ic3">✨</div>
         <h3>Insparksfest</h3>
         <p>Välkomna nya studenter med stil. Kommer snart – hör av er om ni är intresserade.</p>
         <span class="svc-tag">Kommer snart</span>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- VENUES -->
+<!-- ============================================================
+     VENUES
+     ============================================================ -->
 <section id="lokaler">
   <div class="inner">
     <div class="sec-label">Våra samarbeten</div>
     <h2>Lokaler vi älskar.</h2>
     <div class="venue-grid">
+
       <div class="venue-card">
         <span class="venue-emoji">🏛️</span>
         <h3>[Lokal 1]</h3>
         <p>Plats för upp till XXX gäster. Perfekt för den stora studentmiddagen.</p>
-        <span class="venue-pill gold">Stor fest</span>
+        <span class="venue-pill vp-a">Stor fest</span>
       </div>
+
       <div class="venue-card">
         <span class="venue-emoji">🍾</span>
         <h3>[Lokal 2]</h3>
         <p>Intim och exklusiv känsla. Populär för privata mottagningar.</p>
-        <span class="venue-pill pink">Mottagning</span>
+        <span class="venue-pill vp-r">Mottagning</span>
       </div>
+
       <div class="venue-card">
         <span class="venue-emoji">🎵</span>
         <h3>[Lokal 3]</h3>
         <p>Dancefloor och bra ljud. Kvällens fest når nästa nivå här.</p>
-        <span class="venue-pill blue">Nattklubb</span>
+        <span class="venue-pill vp-s">Nattklubb</span>
       </div>
+
       <div class="venue-card">
         <span class="venue-emoji">🌿</span>
         <h3>[Lokal 4]</h3>
         <p>Friluftskänsla och unik atmosfär. Sommarfester i världsklass.</p>
-        <span class="venue-pill gold">Sommar</span>
+        <span class="venue-pill vp-a">Sommar</span>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- REVIEWS -->
-<section id="reviews" style="background:var(--surface)">
+<!-- ============================================================
+     REVIEWS
+     ============================================================ -->
+<section id="reviews" class="bg-alt">
   <div class="inner">
     <div class="sec-label">Vad folk säger</div>
     <h2>Echte ord från klasser vi hjälpt.</h2>
     <div class="reviews-grid">
+
       <div class="review">
         <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
         <q>Helt otroligt smidigt. Vi hade knappt ett möte och ändå blev allt perfekt. Klassen fick ihop mer pengar än vi räknat med.</q>
         <div class="review-author">
-          <div class="review-avatar av1">EA</div>
+          <div class="review-avatar rav1">EA</div>
           <div>
             <div class="review-name">Ella A.</div>
             <div class="review-meta">Klassansvarig, NA-programmet 2024</div>
           </div>
         </div>
       </div>
+
       <div class="review">
         <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
         <q>Vi hade testat ett annat bolag tidigare – det var inte ens nära. Studentfixarna svarade alltid snabbt och löste allt utan att vi behövde fråga.</q>
         <div class="review-author">
-          <div class="review-avatar av2">MK</div>
+          <div class="review-avatar rav2">MK</div>
           <div>
             <div class="review-name">Marcus K.</div>
             <div class="review-meta">Kassör, Ekonomiprogrammet 2024</div>
           </div>
         </div>
       </div>
+
       <div class="review">
         <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
         <q>Kontakten var helt klockren hela vägen. Aldrig orolig för att något skulle falla bort. Lokalen var en dröm och maten fantastisk.</q>
         <div class="review-author">
-          <div class="review-avatar av3">SL</div>
+          <div class="review-avatar rav3">SL</div>
           <div>
             <div class="review-name">Sara L.</div>
             <div class="review-meta">Klassansvarig, SA-programmet 2024</div>
           </div>
         </div>
       </div>
+
       <div class="review">
         <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
         <q>Klassen tjänade in nästan dubbelt mot vad vi trodde. Inga konstiga avgifter, inga säljkrav. Bara en grym student.</q>
         <div class="review-author">
-          <div class="review-avatar av4">JB</div>
+          <div class="review-avatar rav4">JB</div>
           <div>
             <div class="review-name">Johan B.</div>
             <div class="review-meta">Klassrepresentant, TE-programmet 2023</div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
+<!-- ============================================================
+     HOW IT WORKS
+     ============================================================ -->
 <section id="hur">
   <div class="inner">
     <div class="sec-label">Hur det funkar</div>
     <h2>Från idé till legendar-student.</h2>
     <div class="steps">
+
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
@@ -402,6 +1182,7 @@ footer p{font-size:12px;color:var(--muted)}
           <p>Berätta om klassen, datum och vad ni drömmer om. Vi svarar inom 24h och bokar ett möte.</p>
         </div>
       </div>
+
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
@@ -409,6 +1190,7 @@ footer p{font-size:12px;color:var(--muted)}
           <p>Lokaler, mat, schema och ett fast pris. Ni vet exakt vad ni betalar – inga dolda kostnader.</p>
         </div>
       </div>
+
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
@@ -416,6 +1198,7 @@ footer p{font-size:12px;color:var(--muted)}
           <p>All intäkt utöver vårt arvode går direkt till er. Ju mer ni säljer, desto fetare klassbudget.</p>
         </div>
       </div>
+
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-body">
@@ -423,16 +1206,21 @@ footer p{font-size:12px;color:var(--muted)}
           <p>Ni dyker upp och njuter. Vi ser till att allt är på plats, på tid och exakt som ni föreställt er.</p>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
-<section style="background:var(--surface);text-align:center">
+<!-- ============================================================
+     PRICING
+     ============================================================ -->
+<section class="bg-alt" style="text-align:center">
   <div class="inner">
     <div class="sec-label">Priset</div>
     <h2>Enkelt, ärligt, transparent.</h2>
-    <p style="color:var(--muted2);max-width:480px;margin:.5rem auto 0;font-size:.95rem;line-height:1.7">Vi tar ett fast arvode beroende på festens storlek. Allt utöver det – är ert.</p>
+    <p style="color:var(--text2);max-width:480px;margin:.5rem auto 0;font-size:.95rem;line-height:1.75">
+      Vi tar ett fast arvode beroende på festens storlek. Allt utöver det – är ert.
+    </p>
     <div class="pricing-cards">
       <div class="pcard">
         <div class="pcard-label">Vår ersättning</div>
@@ -453,133 +1241,182 @@ footer p{font-size:12px;color:var(--muted)}
     <p class="pricing-note">Vill ni ha ett exakt prisförslag? Hör av er – vi räknar på just er fest utan förpliktelser.</p>
   </div>
 </section>
-
-<!-- CONTACT FORM -->
-<section id="kontakt" class="contact-section">
-  <div class="contact-inner">
-    <div class="sec-label">Kom igång</div>
-    <h2>Redo att boka en student att minnas?</h2>
-    <p>Fyll i formuläret så hör vi av oss inom 24 timmar med ett skräddarsytt upplägg för er klass.</p>
-
-    <div class="form-card">
-      <div id="form-inner">
-        <div class="form-row">
-          <div class="field">
-            <label>Namn<span class="req">*</span></label>
-            <input type="text" id="f-name" placeholder="Ditt namn" autocomplete="name">
-          </div>
-          <div class="field">
-            <label>Telefon<span class="req">*</span></label>
-            <input type="tel" id="f-phone" placeholder="07X – XXX XX XX" autocomplete="tel">
-          </div>
+    
+<!-- ============================================================
+     CONTACT FORM (FORMSPREE INTEGRATED)
+     ============================================================ -->
+     <section id="kontakt">
+      <div class="contact-inner">
+        <div class="sec-label">Kom igång</div>
+        <h2>Redo att boka en student att minnas?</h2>
+        <p class="contact-intro">
+          Fyll i formuläret så hör vi av oss inom 24 timmar med ett skräddarsytt upplägg för er klass.
+        </p>
+    
+        <div class="form-card">
+    
+          <!-- FORMSPREE FORM START -->
+          <form action="https://formspree.io/f/mojrozwo" method="POST">
+    
+            <!-- Redirect till egen tack-sida -->
+            <input type="hidden" name="_next" value="tack.html">
+    
+            <div class="form-row">
+              <div class="field">
+                <label for="f-name">Namn<span class="req">*</span></label>
+                <input type="text" id="f-name" name="name" placeholder="Ditt namn" autocomplete="name" required>
+              </div>
+    
+              <div class="field">
+                <label for="f-phone">Telefon<span class="req">*</span></label>
+                <input type="tel" id="f-phone" name="phone" placeholder="07X – XXX XX XX" autocomplete="tel" required>
+              </div>
+            </div>
+    
+            <div class="field">
+              <label for="f-email">E-postadress<span class="req">*</span></label>
+              <input type="email" id="f-email" name="email" placeholder="din@mejl.se" autocomplete="email" required>
+            </div>
+    
+            <div class="form-row">
+              <div class="field">
+                <label for="f-school">Skola<span class="req">*</span></label>
+                <input type="text" id="f-school" name="school" placeholder="T.ex. Danderyds gymnasium" required>
+              </div>
+    
+              <div class="field">
+                <label for="f-class">Klass / Program<span class="req">*</span></label>
+                <input type="text" id="f-class" name="class" placeholder="T.ex. NA3B, Ekonomi" required>
+              </div>
+            </div>
+    
+            <div class="divider"></div>
+    
+            <div class="field">
+              <label>Vad vill ni ha hjälp med?<span class="req">*</span></label>
+    
+              <div class="checkboxes">
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="studentfest">
+                  <span>Studentfest</span>
+                </label>
+    
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="flak">
+                  <span>Flak & transport</span>
+                </label>
+    
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="frukost">
+                  <span>Studentfrukost</span>
+                </label>
+    
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="mottagning">
+                  <span>Privat mottagning</span>
+                </label>
+    
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="catering">
+                  <span>Catering</span>
+                </label>
+    
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="hela">
+                  <span>Hela studentdagen</span>
+                </label>
+              </div>
+            </div>
+    
+            <div class="field" style="margin-top:.5rem">
+              <label for="f-date">Ungefärligt datum</label>
+              <input type="text" id="f-date" name="date" placeholder="T.ex. juni 2025, osäker ännu">
+            </div>
+    
+            <div class="field">
+              <label for="f-message">Övrig info / önskemål</label>
+              <textarea id="f-message" name="message" placeholder="Antal gäster, budget, specifika önskemål eller bara en hälsning..."></textarea>
+            </div>
+    
+            <button class="submit-btn" type="submit">
+              Skicka förfrågan →
+            </button>
+    
+            <p class="privacy">
+              Vi delar aldrig dina uppgifter med tredje part. Svarstid inom 24h.
+            </p>
+    
+          </form>
+          <!-- FORMSPREE FORM END -->
+    
         </div>
-
-        <div class="field">
-          <label>E-postadress<span class="req">*</span></label>
-          <input type="email" id="f-email" placeholder="din@mejl.se" autocomplete="email">
-        </div>
-
-        <div class="form-row">
-          <div class="field">
-            <label>Skola<span class="req">*</span></label>
-            <input type="text" id="f-school" placeholder="T.ex. Danderyds gymnasium">
-          </div>
-          <div class="field">
-            <label>Klass / Program<span class="req">*</span></label>
-            <input type="text" id="f-class" placeholder="T.ex. NA3B, Ekonomi">
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="field">
-          <label>Vad vill ni ha hjälp med?<span class="req">*</span></label>
-          <div class="checkboxes" id="checkboxes">
-            <label class="checkbox-item"><input type="checkbox" value="studentfest"> <span>Studentfest</span></label>
-            <label class="checkbox-item"><input type="checkbox" value="flak"> <span>Flak & transport</span></label>
-            <label class="checkbox-item"><input type="checkbox" value="frukost"> <span>Studentfrukost</span></label>
-            <label class="checkbox-item"><input type="checkbox" value="mottagning"> <span>Privat mottagning</span></label>
-            <label class="checkbox-item"><input type="checkbox" value="catering"> <span>Catering</span></label>
-            <label class="checkbox-item"><input type="checkbox" value="hela"> <span>Hela studentdagen</span></label>
-          </div>
-        </div>
-
-        <div class="field" style="margin-top:.6rem">
-          <label>Ungefärligt datum</label>
-          <input type="text" id="f-date" placeholder="T.ex. juni 2025, osäker ännu">
-        </div>
-
-        <div class="field">
-          <label>Övrig info / önskemål</label>
-          <textarea id="f-message" placeholder="Antal gäster, budget, specifika önskemål eller bara en hälsning..."></textarea>
-        </div>
-
-        <button class="submit-btn" onclick="handleSubmit()">Skicka förfrågan &nbsp;→</button>
-        <p class="privacy">Vi delar aldrig dina uppgifter med tredje part. Svarstid inom 24h.</p>
       </div>
+    </section>
 
-      <div class="success-msg" id="success-msg">
-        <div class="success-icon">✓</div>
-        <h3>Tack – vi hör av oss snart!</h3>
-        <p>Vi har tagit emot er förfrågan och återkommer inom 24 timmar med ett skräddarsytt upplägg.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
 <footer>
   <div class="footer-logo">STUDENTFIXARNA</div>
   <p>Studentfester som gynnar klassen – inte festfixarna.</p>
 </footer>
 
+<!-- ============================================================
+     JS
+     ============================================================ -->
 <script>
-function toggleMenu(){
-  var m=document.getElementById('mobile-menu');
-  m.style.display=m.style.display==='flex'?'none':'flex';
+function toggleMenu() {
+  var m = document.getElementById('mobile-menu');
+  var b = document.getElementById('burger');
+  var isOpen = m.classList.toggle('open');
+  b.classList.toggle('open', isOpen);
+  b.setAttribute('aria-label', isOpen ? 'Stäng meny' : 'Öppna meny');
+}
+function closeMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('burger').classList.remove('open');
 }
 
-function handleSubmit(){
-  var name=document.getElementById('f-name');
-  var email=document.getElementById('f-email');
-  var phone=document.getElementById('f-phone');
-  var school=document.getElementById('f-school');
-  var cls=document.getElementById('f-class');
-  var fields=[name,email,phone,school,cls];
-  var valid=true;
+function handleSubmit() {
+  var fields = [
+    document.getElementById('f-name'),
+    document.getElementById('f-email'),
+    document.getElementById('f-phone'),
+    document.getElementById('f-school'),
+    document.getElementById('f-class')
+  ];
+  var valid = true;
 
-  fields.forEach(function(f){
-    if(!f.value.trim()){
-      f.classList.add('error-border');
-      valid=false;
+  fields.forEach(function(f) {
+    if (!f.value.trim()) {
+      f.classList.add('input-error'); valid = false;
     } else {
-      f.classList.remove('error-border');
+      f.classList.remove('input-error');
     }
   });
 
-  var checked=document.querySelectorAll('#checkboxes input:checked');
-  var cbWrap=document.getElementById('checkboxes');
-  if(checked.length===0){
-    cbWrap.style.outline='1px solid rgba(232,71,154,.6)';
-    cbWrap.style.borderRadius='8px';
-    cbWrap.style.padding='8px';
-    valid=false;
+  var checked = document.querySelectorAll('#checkboxes input:checked');
+  var cbWrap  = document.getElementById('checkboxes');
+  if (checked.length === 0) {
+    cbWrap.style.outline      = '1.5px solid #D4785A';
+    cbWrap.style.borderRadius = '8px';
+    cbWrap.style.padding      = '8px';
+    valid = false;
   } else {
-    cbWrap.style.outline='none';
-    cbWrap.style.padding='0';
+    cbWrap.style.outline = 'none';
+    cbWrap.style.padding = '0';
   }
 
-  if(!valid) return;
+  if (!valid) return;
 
-  document.getElementById('form-inner').style.display='none';
-  document.getElementById('success-msg').style.display='block';
+  document.getElementById('form-inner').style.display  = 'none';
+  document.getElementById('success-msg').style.display = 'block';
 }
 
-document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(function(a){
-  a.addEventListener('click',function(){
-    document.getElementById('mobile-menu').style.display='none';
-  });
+document.querySelectorAll('input, textarea').forEach(function(el) {
+  el.addEventListener('input', function() { el.classList.remove('input-error'); });
 });
 </script>
+
 </body>
 </html>
