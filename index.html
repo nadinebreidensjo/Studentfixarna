@@ -217,28 +217,29 @@ nav {
   flex-shrink: 0;
 }
 
-/* ── H1 FIX ──────────────────────────────────────────────────
-   white-space: nowrap keeps "En grym student." on one line on
-   desktop. On small screens the clamp() shrinks the font and
-   white-space is reset to normal so it wraps naturally.
-   ----------------------------------------------------------- */
 h1 {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(1.75rem, 5vw, 3.6rem);
+  font-size: clamp(1.55rem, 5vw, 3.6rem);
   font-weight: 800;
-  line-height: 1.07;
+  line-height: 1.1;
   letter-spacing: -0.03em;
   color: var(--text);
   margin-bottom: 1.25rem;
-  white-space: nowrap;       /* one line on desktop */
 }
 
+/*
+ * FIX 2: .grad-text är INLINE (ingen display:block) på desktop
+ * så att "Klasskassan tackar." sitter på rad 2 tack vare
+ * att h1 är nowrap och .grad-text är ett inline-element som
+ * "hänger" på nästa rad naturligt.
+ * På mobil: white-space:normal + display:block = egna rader.
+ */
 .grad-text {
   background: var(--grad);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  display: block;            /* "Klasskassan tackar." always its own line */
+  display: block; /* alltid på egen rad */
 }
 
 .hero-sub {
@@ -750,22 +751,34 @@ textarea { resize: vertical; min-height: 105px; line-height: 1.6; }
   font-size: 12px; color: var(--muted); line-height: 1.6;
 }
 
-.success-msg { display: none; text-align: center; padding: 2.5rem 1rem; }
+/*
+ * FIX 3: Success-popup – snygg och centrerad i form-kortet
+ */
+.success-msg {
+  display: none;
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
 .success-icon {
-  width: 60px; height: 60px;
+  width: 64px; height: 64px;
   border-radius: 50%;
   background: rgba(212,120,90,.12);
-  border: 1.5px solid rgba(212,120,90,.3);
+  border: 1.5px solid rgba(212,120,90,.35);
   display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 1.1rem;
-  font-size: 24px; color: var(--accent);
+  margin: 0 auto 1.25rem;
+  font-size: 28px;
+  color: var(--accent);
 }
 .success-msg h3 {
   font-family: 'Syne', sans-serif;
-  font-size: 1.3rem; font-weight: 800;
-  color: var(--text); margin-bottom: .45rem;
+  font-size: 1.4rem; font-weight: 800;
+  color: var(--text); margin-bottom: .5rem;
 }
-.success-msg p { font-size: 14px; color: var(--text2); line-height: 1.7; }
+.success-msg p {
+  font-size: 14.5px; color: var(--text2);
+  line-height: 1.7; max-width: 380px;
+  margin: 0 auto;
+}
 
 /* ============================================================
    FOOTER
@@ -799,14 +812,12 @@ footer p { font-size: 12px; color: var(--muted); }
   .nav-burger { display: flex; }
   nav         { padding: .85rem 1.25rem; }
 
-  .hero     { padding: 3.25rem 1.25rem 2.75rem; }
+  .hero { padding: 3.25rem 1.25rem 2.75rem; }
 
-  /* Allow h1 to wrap naturally on small screens */
   h1 {
-    white-space: normal;
-    font-size: clamp(1.75rem, 10vw, 2.5rem);
+    font-size: clamp(1.55rem, 8.5vw, 2.4rem);
     letter-spacing: -0.02em;
-    line-height: 1.1;
+    line-height: 1.12;
   }
 
   .hero-sub { font-size: .95rem; }
@@ -815,9 +826,9 @@ footer p { font-size: 12px; color: var(--muted); }
   .btn-sec  { width: 100%; max-width: 300px; text-align: center; }
 
   .strip-item { min-width: 50%; flex: 0 0 50%; border-bottom: 1px solid var(--border); }
-  .strip-item:nth-child(2n)             { border-right: none; }
+  .strip-item:nth-child(2n)  { border-right: none; }
   .strip-item:nth-child(3),
-  .strip-item:nth-child(4)              { border-bottom: none; }
+  .strip-item:nth-child(4)   { border-bottom: none; }
 
   section { padding: 3rem 1.25rem; }
 
@@ -836,7 +847,7 @@ footer p { font-size: 12px; color: var(--muted); }
 }
 
 @media (max-width: 380px) {
-  h1 { font-size: clamp(1.6rem, 11vw, 2rem); }
+  h1 { font-size: clamp(1.4rem, 9vw, 1.75rem); }
   .hero-pill { font-size: 10px; }
 }
 </style>
@@ -1206,7 +1217,6 @@ document.getElementById('contact-form').addEventListener('submit', async functio
   e.preventDefault();
   var form = e.target;
 
-  /* Require at least one checkbox */
   var checked = form.querySelectorAll('input[name="hjalp"]:checked');
   var cbWrap  = document.getElementById('checkboxes');
   if (checked.length === 0) {
@@ -1235,7 +1245,6 @@ document.getElementById('contact-form').addEventListener('submit', async functio
   }
 });
 
-/* Clear error outline when user picks a checkbox */
 document.querySelectorAll('input[name="hjalp"]').forEach(function(cb) {
   cb.addEventListener('change', function() {
     document.getElementById('checkboxes').style.outline = 'none';
@@ -1243,6 +1252,5 @@ document.querySelectorAll('input[name="hjalp"]').forEach(function(cb) {
   });
 });
 </script>
-
 </body>
 </html>
