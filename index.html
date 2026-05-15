@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="sv">
-<head><meta name="description" content="Studentfixarna ordnar studentfester i Stockholm. Vi fixar allt – lokal, flak, mat och planering. All vinst går till klassen.">
-  <meta name="keywords" content="studentfest, student stockholm, flak, student 2026, studentfixarna">
-  <meta name="robots" content="index, follow">
-  
-  <link rel="canonical" href="https://studentfixarna.se/">
-  
-  <meta property="og:title" content="Studentfixarna – Studentfest på dina villkor">
-  <meta property="og:description" content="Vi fixar hela studentdagen. Ni behåller pengarna.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://studentfixarna.se/">
+<head>
+<!-- SEO -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Studentfixarna – Studentfesten på dina villkor</title>
+<meta name="description" content="Studentfixarna ordnar studentfester i Stockholm. Vi fixar allt – lokal, flak, mat och planering. All vinst går till klassen.">
+<meta name="keywords" content="studentfest, student stockholm, flak, student 2026, studentfixarna">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://studentfixarna.se/">
+<meta property="og:title" content="Studentfixarna – Studentfest på dina villkor">
+<meta property="og:description" content="Vi fixar hela studentdagen. Ni behåller pengarna.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://studentfixarna.se/">
+
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
@@ -21,34 +22,26 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* Warm dark palette – grafit with mocha undertone */
-  --bg:        #1E1B18;   /* main bg – deep warm charcoal */
-  --bg2:       #252118;   /* slightly warmer dark */
-  --surface:   #2C2720;   /* card/panel surface */
-  --surface2:  #332D25;   /* elevated surface */
-
+  --bg:        #1E1B18;
+  --bg2:       #252118;
+  --surface:   #2C2720;
+  --surface2:  #332D25;
   --border:    rgba(255,240,220,0.08);
   --border2:   rgba(255,240,220,0.14);
   --border3:   rgba(255,240,220,0.22);
-
-  --text:      #F5EFE6;   /* warm off-white */
-  --text2:     #C9BFB2;   /* secondary text */
-  --muted:     #8C8077;   /* muted text */
-  --muted2:    #5E5650;   /* very muted */
-
-  /* Accent – softer, warmer than before */
-  --accent:    #D4785A;   /* warm terracotta */
-  --rose:      #C47A8A;   /* dusty rose */
-  --slate:     #7B95B8;   /* soft slate blue */
-  --gold:      #D4A96A;   /* warm sand gold */
-
+  --text:      #F5EFE6;
+  --text2:     #C9BFB2;
+  --muted:     #8C8077;
+  --muted2:    #5E5650;
+  --accent:    #D4785A;
+  --rose:      #C47A8A;
+  --slate:     #7B95B8;
+  --gold:      #D4A96A;
   --grad:      linear-gradient(135deg, #D4785A 0%, #C47A8A 55%, #7B95B8 100%);
   --grad2:     linear-gradient(135deg, #D4785A, #C47A8A);
-
   --r:   12px;
   --r2:  20px;
   --rp:  50px;
-
   --shadow-sm: 0 1px 4px rgba(0,0,0,.25);
   --shadow:    0 4px 20px rgba(0,0,0,.30);
   --shadow-lg: 0 12px 40px rgba(0,0,0,.40);
@@ -117,12 +110,10 @@ nav {
   padding: .42rem 1.15rem;
   border-radius: var(--rp);
   font-weight: 600 !important;
-  color: var(--bg) !important;
   transition: opacity .15s, transform .15s !important;
 }
 .nav-cta:hover { opacity: .88 !important; transform: translateY(-1px) !important; }
 
-/* Hamburger */
 .nav-burger {
   display: none;
   flex-direction: column;
@@ -144,7 +135,6 @@ nav {
 .nav-burger.open span:nth-child(2) { opacity: 0; }
 .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Mobile menu */
 .mobile-menu {
   display: none;
   flex-direction: column;
@@ -168,7 +158,7 @@ nav {
 .mobile-menu a:hover { background: var(--surface2); }
 .mobile-menu a.cta-mob {
   background: var(--grad);
-  color: var(--bg);
+  color: #1E1B18;
   font-weight: 700;
   border-bottom: none;
   text-align: center;
@@ -187,7 +177,6 @@ nav {
   border-bottom: 1px solid var(--border);
 }
 
-/* Subtle warm glow */
 .hero::before {
   content: '';
   position: absolute;
@@ -228,16 +217,20 @@ nav {
   flex-shrink: 0;
 }
 
+/* ── H1 FIX ──────────────────────────────────────────────────
+   white-space: nowrap keeps "En grym student." on one line on
+   desktop. On small screens the clamp() shrinks the font and
+   white-space is reset to normal so it wraps naturally.
+   ----------------------------------------------------------- */
 h1 {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(2rem, 9vw, 4rem);
+  font-size: clamp(1.75rem, 5vw, 3.6rem);
   font-weight: 800;
   line-height: 1.07;
   letter-spacing: -0.03em;
   color: var(--text);
   margin-bottom: 1.25rem;
-  word-break: break-word;
-  overflow-wrap: break-word;
+  white-space: nowrap;       /* one line on desktop */
 }
 
 .grad-text {
@@ -245,6 +238,7 @@ h1 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  display: block;            /* "Klasskassan tackar." always its own line */
 }
 
 .hero-sub {
@@ -352,7 +346,6 @@ h2 {
 }
 
 .inner { max-width: 960px; margin: 0 auto; }
-
 .bg-alt { background: var(--bg2); }
 
 /* ============================================================
@@ -428,7 +421,6 @@ h2 {
   color: var(--text);
   margin-bottom: .3rem;
 }
-
 .callout p { font-size: 13.5px; color: var(--text2); line-height: 1.65; }
 
 /* ============================================================
@@ -472,7 +464,6 @@ h2 {
   color: var(--text);
   margin-bottom: .4rem;
 }
-
 .svc p { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
 .svc-tag {
@@ -510,7 +501,6 @@ h2 {
 .venue-card:hover { border-color: rgba(212,120,90,.4); transform: translateY(-3px); box-shadow: var(--shadow); }
 
 .venue-emoji { font-size: 1.6rem; margin-bottom: .6rem; display: block; }
-
 .venue-card h3 {
   font-family: 'Syne', sans-serif;
   font-size: .88rem;
@@ -518,7 +508,6 @@ h2 {
   color: var(--text);
   margin-bottom: .25rem;
 }
-
 .venue-card p { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
 
 .venue-pill {
@@ -555,10 +544,8 @@ h2 {
 }
 
 .review-stars { display: flex; gap: 3px; }
-
 .star {
-  width: 13px;
-  height: 13px;
+  width: 13px; height: 13px;
   background: var(--gold);
   clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
   display: inline-block;
@@ -574,17 +561,12 @@ h2 {
 }
 
 .review-author { display: flex; align-items: center; gap: 10px; }
-
 .review-avatar {
-  width: 34px;
-  height: 34px;
+  width: 34px; height: 34px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   font-family: 'Syne', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 12px; font-weight: 700;
   flex-shrink: 0;
 }
 .rav1 { background: rgba(212,120,90,.18);  color: var(--accent); }
@@ -592,65 +574,46 @@ h2 {
 .rav3 { background: rgba(123,149,184,.18); color: var(--slate); }
 .rav4 { background: rgba(212,169,106,.18); color: var(--gold); }
 
-.review-name  { font-size: 13px; font-weight: 600; color: var(--text); }
-.review-meta  { font-size: 12px; color: var(--muted); }
+.review-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.review-meta { font-size: 12px; color: var(--muted); }
 
 /* ============================================================
    HOW IT WORKS
    ============================================================ */
-.steps {
-  display: flex;
-  flex-direction: column;
-  margin-top: 2.25rem;
-  max-width: 600px;
-}
+.steps { display: flex; flex-direction: column; margin-top: 2.25rem; max-width: 600px; }
 
 .step {
-  display: flex;
-  gap: 1.25rem;
+  display: flex; gap: 1.25rem;
   align-items: flex-start;
   padding-bottom: 2rem;
   position: relative;
 }
-
 .step:not(:last-child)::after {
   content: '';
   position: absolute;
-  left: 15px;
-  top: 34px;
-  bottom: 0;
+  left: 15px; top: 34px; bottom: 0;
   width: 1px;
   background: var(--border2);
 }
 
 .step-num {
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
+  width: 32px; height: 32px; min-width: 32px;
   border-radius: 50%;
   background: var(--grad);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   font-family: 'Syne', sans-serif;
-  font-size: .82rem;
-  font-weight: 800;
+  font-size: .82rem; font-weight: 800;
   color: #fff;
-  position: relative;
-  z-index: 1;
+  position: relative; z-index: 1;
   box-shadow: 0 2px 10px rgba(212,120,90,.30);
 }
 
 .step-body { padding-top: .2rem; }
-
 .step-body h3 {
   font-family: 'Syne', sans-serif;
-  font-size: .95rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: .3rem;
+  font-size: .95rem; font-weight: 700;
+  color: var(--text); margin-bottom: .3rem;
 }
-
 .step-body p { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
 
 /* ============================================================
@@ -674,49 +637,35 @@ h2 {
 }
 
 .pcard-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: .6rem;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: .6rem;
 }
-
 .pcard-val {
   font-family: 'Syne', sans-serif;
-  font-size: 1.35rem;
-  font-weight: 800;
+  font-size: 1.35rem; font-weight: 800;
   background: var(--grad);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: .35rem;
 }
-
 .pcard p { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
 
 .pricing-note {
-  font-size: 13px;
-  color: var(--muted);
-  max-width: 440px;
-  margin: 1.5rem auto 0;
-  text-align: center;
-  line-height: 1.65;
+  font-size: 13px; color: var(--muted);
+  max-width: 440px; margin: 1.5rem auto 0;
+  text-align: center; line-height: 1.65;
 }
 
 /* ============================================================
    CONTACT FORM
    ============================================================ */
-.contact-inner {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-}
+.contact-inner { max-width: 600px; margin: 0 auto; text-align: center; }
 
 .contact-intro {
   color: var(--text2);
-  font-size: .98rem;
-  line-height: 1.75;
+  font-size: .98rem; line-height: 1.75;
   margin-bottom: 2.25rem;
 }
 
@@ -729,26 +678,12 @@ h2 {
   box-shadow: var(--shadow);
 }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: .42rem;
-  margin-bottom: 1rem;
-}
+.field { display: flex; flex-direction: column; gap: .42rem; margin-bottom: 1rem; }
 
-label {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--text2);
-}
-
-.req { color: var(--accent); margin-left: 2px; }
+label { font-size: 12.5px; font-weight: 600; color: var(--text2); }
+.req  { color: var(--accent); margin-left: 2px; }
 
 input[type=text],
 input[type=email],
@@ -767,14 +702,11 @@ textarea {
   -webkit-appearance: none;
   appearance: none;
 }
-
 input::placeholder, textarea::placeholder { color: var(--muted2); }
-
 input:focus, textarea:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(212,120,90,.15);
 }
-
 .input-error {
   border-color: var(--accent) !important;
   box-shadow: 0 0 0 3px rgba(212,120,90,.15) !important;
@@ -782,32 +714,16 @@ input:focus, textarea:focus {
 
 textarea { resize: vertical; min-height: 105px; line-height: 1.6; }
 
-.checkboxes {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: .5rem;
-  margin-top: .25rem;
-}
+.checkboxes { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-top: .25rem; }
 
-.checkbox-item {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  cursor: pointer;
-}
-
+.checkbox-item { display: flex; align-items: center; gap: .5rem; cursor: pointer; }
 .checkbox-item input[type=checkbox] {
-  width: 17px;
-  height: 17px;
-  min-width: 17px;
-  border-radius: 5px;
-  cursor: pointer;
+  width: 17px; height: 17px; min-width: 17px;
+  border-radius: 5px; cursor: pointer;
   accent-color: var(--accent);
-  padding: 0;
-  border: none;
+  padding: 0; border: none;
   background: var(--surface2);
 }
-
 .checkbox-item span { font-size: 13.5px; color: var(--text2); }
 
 .divider { height: 1px; background: var(--border2); margin: 1.25rem 0; }
@@ -819,8 +735,7 @@ textarea { resize: vertical; min-height: 105px; line-height: 1.6; }
   border-radius: var(--rp);
   color: #fff;
   font-family: 'Syne', sans-serif;
-  font-size: 15px;
-  font-weight: 800;
+  font-size: 15px; font-weight: 800;
   padding: .95rem 2rem;
   cursor: pointer;
   transition: opacity .15s, transform .15s;
@@ -831,41 +746,25 @@ textarea { resize: vertical; min-height: 105px; line-height: 1.6; }
 .submit-btn:hover { opacity: .88; transform: translateY(-1px); }
 
 .privacy {
-  text-align: center;
-  margin-top: .85rem;
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.6;
+  text-align: center; margin-top: .85rem;
+  font-size: 12px; color: var(--muted); line-height: 1.6;
 }
 
-.success-msg {
-  display: none;
-  text-align: center;
-  padding: 2.5rem 1rem;
-}
-
+.success-msg { display: none; text-align: center; padding: 2.5rem 1rem; }
 .success-icon {
-  width: 60px;
-  height: 60px;
+  width: 60px; height: 60px;
   border-radius: 50%;
   background: rgba(212,120,90,.12);
   border: 1.5px solid rgba(212,120,90,.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   margin: 0 auto 1.1rem;
-  font-size: 24px;
-  color: var(--accent);
+  font-size: 24px; color: var(--accent);
 }
-
 .success-msg h3 {
   font-family: 'Syne', sans-serif;
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: var(--text);
-  margin-bottom: .45rem;
+  font-size: 1.3rem; font-weight: 800;
+  color: var(--text); margin-bottom: .45rem;
 }
-
 .success-msg p { font-size: 14px; color: var(--text2); line-height: 1.7; }
 
 /* ============================================================
@@ -877,18 +776,15 @@ footer {
   padding: 2rem 1.5rem;
   text-align: center;
 }
-
 .footer-logo {
   font-family: 'Syne', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-size: 1.1rem; font-weight: 800;
   background: var(--grad);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: .35rem;
 }
-
 footer p { font-size: 12px; color: var(--muted); }
 
 /* ============================================================
@@ -903,17 +799,25 @@ footer p { font-size: 12px; color: var(--muted); }
   .nav-burger { display: flex; }
   nav         { padding: .85rem 1.25rem; }
 
-  .hero        { padding: 3.25rem 1.25rem 2.75rem; }
-  h1           { font-size: clamp(1.75rem, 10vw, 2.5rem); letter-spacing: -0.02em; line-height: 1.1; }
-  .hero-sub    { font-size: .95rem; }
-  .btns        { flex-direction: column; align-items: center; }
-  .btn-main,
-  .btn-sec     { width: 100%; max-width: 300px; text-align: center; }
+  .hero     { padding: 3.25rem 1.25rem 2.75rem; }
 
-  .strip-item  { min-width: 50%; flex: 0 0 50%; border-bottom: 1px solid var(--border); }
-  .strip-item:nth-child(2n) { border-right: none; }
+  /* Allow h1 to wrap naturally on small screens */
+  h1 {
+    white-space: normal;
+    font-size: clamp(1.75rem, 10vw, 2.5rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .hero-sub { font-size: .95rem; }
+  .btns     { flex-direction: column; align-items: center; }
+  .btn-main,
+  .btn-sec  { width: 100%; max-width: 300px; text-align: center; }
+
+  .strip-item { min-width: 50%; flex: 0 0 50%; border-bottom: 1px solid var(--border); }
+  .strip-item:nth-child(2n)             { border-right: none; }
   .strip-item:nth-child(3),
-  .strip-item:nth-child(4)  { border-bottom: none; }
+  .strip-item:nth-child(4)              { border-bottom: none; }
 
   section { padding: 3rem 1.25rem; }
 
@@ -921,12 +825,12 @@ footer p { font-size: 12px; color: var(--muted); }
   .services-grid { grid-template-columns: 1fr; }
   .pricing-cards { grid-template-columns: 1fr; gap: .75rem; }
 
-  .callout       { flex-direction: column; gap: .75rem; }
-  .callout-bar   { width: 100%; height: 3px; min-height: 0; min-width: unset; }
+  .callout     { flex-direction: column; gap: .75rem; }
+  .callout-bar { width: 100%; height: 3px; min-height: 0; min-width: unset; }
 
-  .form-card   { padding: 1.5rem 1.1rem; }
-  .form-row    { grid-template-columns: 1fr; gap: 0; }
-  .checkboxes  { grid-template-columns: 1fr; }
+  .form-card  { padding: 1.5rem 1.1rem; }
+  .form-row   { grid-template-columns: 1fr; gap: 0; }
+  .checkboxes { grid-template-columns: 1fr; }
 
   h2 { font-size: clamp(1.45rem, 7vw, 2rem); }
 }
@@ -935,37 +839,11 @@ footer p { font-size: 12px; color: var(--muted); }
   h1 { font-size: clamp(1.6rem, 11vw, 2rem); }
   .hero-pill { font-size: 10px; }
 }
-/* ===== HERO RESPONSIVE FIX ===== */
-.hero h1 {
-  max-width: 12ch;
-  margin: 0 auto 1.25rem;
-}
-
-@media (max-width: 640px) {
-  .hero h1 {
-    max-width: 100%;
-    line-height: 1.05;
-    font-size: clamp(1.8rem, 9vw, 2.6rem);
-  }
-
-  .hero-sub {
-    padding: 0 0.5rem;
-  }
-}
-
-@media (max-width: 380px) {
-  .hero h1 {
-    font-size: 1.6rem;
-    line-height: 1.1;
-  }
-}
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     NAV
-     ============================================================ -->
+<!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">STUDENTFIXARNA™</a>
   <ul class="nav-links">
@@ -987,13 +865,11 @@ footer p { font-size: 12px; color: var(--muted); }
   <a href="#kontakt"  onclick="closeMenu()" class="cta-mob">Boka nu</a>
 </div>
 
-<!-- ============================================================
-     HERO
-     ============================================================ -->
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-pill"><span class="hero-dot"></span>Studentfixarna™ – Stockholm</div>
-  <h1>En grym student.<br><span class="grad-text">Klasskassan tackar.</span></h1>
-  <p class="hero-sub">Vi tar hand om allt. Ni behåller pengarna. Så enkelt är det.</p>
+  <div class="hero-pill"><span class="hero-dot"></span>Studentfixarna – Stockholm</div>
+  <h1>En grym student.<span class="grad-text">Klasskassan tackar.</span></h1>
+  <p class="hero-sub">Vi tar hand om allt. Ni håller pengarna. Så enkelt är det.</p>
   <div class="btns">
     <a href="#kontakt" class="btn-main">Kom igång</a>
     <a href="#hur" class="btn-sec">Hur funkar det?</a>
@@ -1008,14 +884,12 @@ footer p { font-size: 12px; color: var(--muted); }
   <div class="strip-item"><span class="strip-dot sd-g"></span>Vi fixar allt</div>
 </div>
 
-<!-- ============================================================
-     PITCH
-     ============================================================ -->
+<!-- PITCH -->
 <section id="varfor">
   <div class="inner pitch">
     <div class="sec-label">Varför Studentfixarna</div>
     <h2>Andra bolag tjänar på er.<br>Vi gör tvärtom.</h2>
-    <p class="pitch-sub">Vi startade Studentfixarna för att vi tröttnade på att studentfester mest gynnar eventbolagen. Hos oss går allt överskott från biljettintäkterna till klassen – inte till oss.</p>
+    <p class="pitch-sub">Vi startade Studentfixarna för att vi tröttnade på att studentfester mest gynnar eventbolagen. Hos oss går biljettintäkterna till klassen – inte till oss.</p>
 
     <div class="stat-row">
       <div class="stat">
@@ -1036,178 +910,140 @@ footer p { font-size: 12px; color: var(--muted); }
       <div class="callout-bar"></div>
       <div>
         <h3>Ju fler biljetter ni säljer – desto mer till klassen</h3>
-        <p>När kostnaderna är täckta går all fortsatt biljettförsäljning direkt tillbaka till er klass. Till skillnad från många andra upplägg tjänar vi inte mer på fler sålda biljetter – <b>det gör ni.</b></p>
+        <p>När minimum spend är inne och ni fortsätter sälja, ökar klassens vinst – inte vår. Vi vill att er fest ska vara fullbokad. Det gynnar alla.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     SERVICES
-     ============================================================ -->
+<!-- SERVICES -->
 <section id="tjanster" class="bg-alt">
   <div class="inner">
     <div class="sec-label">Vad vi fixar</div>
     <h2>Allt du drömmer om.</h2>
     <div class="services-grid">
-
       <div class="svc">
         <div class="svc-icon ic1">🎉</div>
         <h3>Studentfesten</h3>
         <p>Rätt lokal, rätt vibe. Vi planerar hela festen – från lokal och mat till logistik och kvällens schema.</p>
         <span class="svc-tag">Populärast</span>
       </div>
-
       <div class="svc">
         <div class="svc-icon ic2">🚌</div>
         <h3>Flak & transport</h3>
         <p>Klassisk studentflak med rutt, dekorationer och allt koordinerat. Ni fokuserar på att ha kul.</p>
         <span class="svc-tag">Studentdagen</span>
       </div>
-
       <div class="svc">
         <div class="svc-icon ic3">☕</div>
         <h3>Studentfrukost & catering</h3>
         <p>Frukost på studentdagen eller mat till festen – vi sköter allt så ni slipper stå med tallrikar.</p>
         <span class="svc-tag">Catering</span>
       </div>
-
       <div class="svc">
         <div class="svc-icon ic1">🏡</div>
         <h3>Privat studentmottagning</h3>
         <p>Planerar ni en privat mottagning för hela kullen? Vi hjälper till – minimum 100 gäster.</p>
         <span class="svc-tag">Min. 100 gäster</span>
       </div>
-
       <div class="svc">
         <div class="svc-icon ic2">📅</div>
         <h3>Hela studentdagen</h3>
         <p>Flak, frukost, middag och fest i ett paket. Ett ställe att hålla koll på – vi har resten.</p>
         <span class="svc-tag">Hela paketet</span>
       </div>
-
       <div class="svc">
         <div class="svc-icon ic3">✨</div>
         <h3>Insparksfest</h3>
         <p>Välkomna nya studenter med stil. Kommer snart – hör av er om ni är intresserade.</p>
         <span class="svc-tag">Kommer snart</span>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     VENUES
-     ============================================================ -->
+<!-- VENUES -->
 <section id="lokaler">
   <div class="inner">
     <div class="sec-label">Våra samarbeten</div>
     <h2>Lokaler vi älskar.</h2>
     <div class="venue-grid">
-
       <div class="venue-card">
         <span class="venue-emoji">🏛️</span>
         <h3>[Lokal 1]</h3>
         <p>Plats för upp till XXX gäster. Perfekt för den stora studentmiddagen.</p>
         <span class="venue-pill vp-a">Stor fest</span>
       </div>
-
       <div class="venue-card">
         <span class="venue-emoji">🍾</span>
         <h3>[Lokal 2]</h3>
         <p>Intim och exklusiv känsla. Populär för privata mottagningar.</p>
         <span class="venue-pill vp-r">Mottagning</span>
       </div>
-
       <div class="venue-card">
         <span class="venue-emoji">🎵</span>
         <h3>[Lokal 3]</h3>
         <p>Dancefloor och bra ljud. Kvällens fest når nästa nivå här.</p>
         <span class="venue-pill vp-s">Nattklubb</span>
       </div>
-
       <div class="venue-card">
         <span class="venue-emoji">🌿</span>
         <h3>[Lokal 4]</h3>
         <p>Friluftskänsla och unik atmosfär. Sommarfester i världsklass.</p>
         <span class="venue-pill vp-a">Sommar</span>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     REVIEWS
-     ============================================================ -->
+<!-- REVIEWS -->
 <section id="reviews" class="bg-alt">
   <div class="inner">
     <div class="sec-label">Vad folk säger</div>
-    <h2>Äkta ord från klasser vi hjälpt.</h2>
+    <h2>Echte ord från klasser vi hjälpt.</h2>
     <div class="reviews-grid">
-
       <div class="review">
         <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
         <q>Helt otroligt smidigt. Vi hade knappt ett möte och ändå blev allt perfekt. Klassen fick ihop mer pengar än vi räknat med.</q>
         <div class="review-author">
           <div class="review-avatar rav1">EA</div>
-          <div>
-            <div class="review-name">Ella A.</div>
-            <div class="review-meta">Klassansvarig, NA-programmet 2024</div>
-          </div>
+          <div><div class="review-name">Ella A.</div><div class="review-meta">Klassansvarig, NA-programmet 2024</div></div>
         </div>
       </div>
-
       <div class="review">
         <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
         <q>Vi hade testat ett annat bolag tidigare – det var inte ens nära. Studentfixarna svarade alltid snabbt och löste allt utan att vi behövde fråga.</q>
         <div class="review-author">
           <div class="review-avatar rav2">MK</div>
-          <div>
-            <div class="review-name">Marcus K.</div>
-            <div class="review-meta">Kassör, Ekonomiprogrammet 2024</div>
-          </div>
+          <div><div class="review-name">Marcus K.</div><div class="review-meta">Kassör, Ekonomiprogrammet 2024</div></div>
         </div>
       </div>
-
       <div class="review">
         <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
         <q>Kontakten var helt klockren hela vägen. Aldrig orolig för att något skulle falla bort. Lokalen var en dröm och maten fantastisk.</q>
         <div class="review-author">
           <div class="review-avatar rav3">SL</div>
-          <div>
-            <div class="review-name">Sara L.</div>
-            <div class="review-meta">Klassansvarig, SA-programmet 2024</div>
-          </div>
+          <div><div class="review-name">Sara L.</div><div class="review-meta">Klassansvarig, SA-programmet 2024</div></div>
         </div>
       </div>
-
       <div class="review">
         <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
         <q>Klassen tjänade in nästan dubbelt mot vad vi trodde. Inga konstiga avgifter, inga säljkrav. Bara en grym student.</q>
         <div class="review-author">
           <div class="review-avatar rav4">JB</div>
-          <div>
-            <div class="review-name">Johan B.</div>
-            <div class="review-meta">Klassrepresentant, TE-programmet 2023</div>
-          </div>
+          <div><div class="review-name">Johan B.</div><div class="review-meta">Klassrepresentant, TE-programmet 2023</div></div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     HOW IT WORKS
-     ============================================================ -->
+<!-- HOW IT WORKS -->
 <section id="hur">
   <div class="inner">
     <div class="sec-label">Hur det funkar</div>
     <h2>Från idé till legendar-student.</h2>
     <div class="steps">
-
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
@@ -1215,7 +1051,6 @@ footer p { font-size: 12px; color: var(--muted); }
           <p>Berätta om klassen, datum och vad ni drömmer om. Vi svarar inom 24h och bokar ett möte.</p>
         </div>
       </div>
-
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
@@ -1223,7 +1058,6 @@ footer p { font-size: 12px; color: var(--muted); }
           <p>Lokaler, mat, schema och ett fast pris. Ni vet exakt vad ni betalar – inga dolda kostnader.</p>
         </div>
       </div>
-
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
@@ -1231,7 +1065,6 @@ footer p { font-size: 12px; color: var(--muted); }
           <p>All intäkt utöver vårt arvode går direkt till er. Ju mer ni säljer, desto fetare klassbudget.</p>
         </div>
       </div>
-
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-body">
@@ -1239,14 +1072,11 @@ footer p { font-size: 12px; color: var(--muted); }
           <p>Ni dyker upp och njuter. Vi ser till att allt är på plats, på tid och exakt som ni föreställt er.</p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     PRICING
-     ============================================================ -->
+<!-- PRICING -->
 <section class="bg-alt" style="text-align:center">
   <div class="inner">
     <div class="sec-label">Priset</div>
@@ -1274,131 +1104,90 @@ footer p { font-size: 12px; color: var(--muted); }
     <p class="pricing-note">Vill ni ha ett exakt prisförslag? Hör av er – vi räknar på just er fest utan förpliktelser.</p>
   </div>
 </section>
-    
-<!-- ============================================================
-     CONTACT FORM (FORMSPREE INTEGRATED)
-     ============================================================ -->
-     <section id="kontakt">
-      <div class="contact-inner">
-        <div class="sec-label">Kom igång</div>
-        <h2>Redo att boka en student att minnas?</h2>
-        <p class="contact-intro">
-          Fyll i formuläret så hör vi av oss inom 24 timmar med ett skräddarsytt upplägg för er klass.
-        </p>
-    
-        <div class="form-card">
-    
-          <!-- FORMSPREE FORM START -->
-          <form action="https://formspree.io/f/mojrozwo" method="POST" id="contact-form">
-    
-            <!-- Redirect till egen tack-sida -->
-            <input type="hidden" name="_next" value="tack.html">
-    
-            <div class="form-row">
-              <div class="field">
-                <label for="f-name">Namn<span class="req">*</span></label>
-                <input type="text" id="f-name" name="name" placeholder="Ditt namn" autocomplete="name" required>
-              </div>
-    
-              <div class="field">
-                <label for="f-phone">Telefon<span class="req">*</span></label>
-                <input type="tel" id="f-phone" name="phone" placeholder="07X – XXX XX XX" autocomplete="tel" required>
-              </div>
-            </div>
-    
-            <div class="field">
-              <label for="f-email">E-postadress<span class="req">*</span></label>
-              <input type="email" id="f-email" name="email" placeholder="din@mejl.se" autocomplete="email" required>
-            </div>
-    
-            <div class="form-row">
-              <div class="field">
-                <label for="f-school">Skola<span class="req">*</span></label>
-                <input type="text" id="f-school" name="school" placeholder="T.ex. Danderyds gymnasium" required>
-              </div>
-    
-              <div class="field">
-                <label for="f-class">Klass / Program<span class="req">*</span></label>
-                <input type="text" id="f-class" name="class" placeholder="T.ex. NA3B, Ekonomi" required>
-              </div>
-            </div>
-    
-            <div class="divider"></div>
-    
-            <div class="field">
-              <label>Vad vill ni ha hjälp med?<span class="req">*</span></label>
-    
-              <div class="checkboxes" id="checkboxes">
-                <label class="checkbox-item">
-                  <input type="checkbox" name="services" value="studentfest">
-                  <span>Studentfest</span>
-                </label>
-    
-                <label class="checkbox-item">
-                  <input type="checkbox" name="services" value="flak">
-                  <span>Flak & transport</span>
-                </label>
-    
-                <label class="checkbox-item">
-                  <input type="checkbox" name="services" value="frukost">
-                  <span>Studentfrukost</span>
-                </label>
-    
-                <label class="checkbox-item">
-                  <input type="checkbox" name="services" value="mottagning">
-                  <span>Privat mottagning</span>
-                </label>
-    
-                <label class="checkbox-item">
-                  <input type="checkbox" name="services" value="catering">
-                  <span>Catering</span>
-                </label>
-    
-                <label class="checkbox-item">
-                  <input type="checkbox" name="services" value="hela">
-                  <span>Hela studentdagen</span>
-                </label>
-              </div>
-            </div>
-    
-            <div class="field" style="margin-top:.5rem">
-              <label for="f-date">Ungefärligt datum</label>
-              <input type="text" id="f-date" name="date" placeholder="T.ex. juni 2025, osäker ännu">
-            </div>
-    
-            <div class="field">
-              <label for="f-message">Övrig info / önskemål</label>
-              <textarea id="f-message" name="message" placeholder="Antal gäster, budget, specifika önskemål eller bara en hälsning..."></textarea>
-            </div>
-    
-            <button class="submit-btn" type="submit">
-              Skicka förfrågan →
-            </button>
-    
-            <p class="privacy">
-              Vi delar aldrig dina uppgifter med tredje part. Svarstid inom 24h.
-            </p>
-    
-          </form>
-          <!-- FORMSPREE FORM END -->
-    
-        </div>
-      </div>
-    </section>
 
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
+<!-- CONTACT FORM -->
+<section id="kontakt">
+  <div class="contact-inner">
+    <div class="sec-label">Kom igång</div>
+    <h2>Redo att boka en student att minnas?</h2>
+    <p class="contact-intro">Fyll i formuläret så hör vi av oss inom 24 timmar med ett skräddarsytt upplägg för er klass.</p>
+
+    <div class="form-card">
+      <div id="form-inner">
+        <form id="contact-form" action="https://formspree.io/f/mojrozwo" method="POST">
+          <div class="form-row">
+            <div class="field">
+              <label for="f-name">Namn<span class="req">*</span></label>
+              <input type="text" id="f-name" name="name" placeholder="Ditt namn" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="f-phone">Telefon<span class="req">*</span></label>
+              <input type="tel" id="f-phone" name="phone" placeholder="07X – XXX XX XX" autocomplete="tel" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-email">E-postadress<span class="req">*</span></label>
+            <input type="email" id="f-email" name="email" placeholder="din@mejl.se" autocomplete="email" required>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="f-school">Skola<span class="req">*</span></label>
+              <input type="text" id="f-school" name="school" placeholder="T.ex. Danderyds gymnasium" required>
+            </div>
+            <div class="field">
+              <label for="f-class">Klass / Program<span class="req">*</span></label>
+              <input type="text" id="f-class" name="class" placeholder="T.ex. NA3B, Ekonomi" required>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="field">
+            <label>Vad vill ni ha hjälp med?<span class="req">*</span></label>
+            <div class="checkboxes" id="checkboxes">
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Studentfest"> <span>Studentfest</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Flak & transport"> <span>Flak & transport</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Studentfrukost"> <span>Studentfrukost</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Privat mottagning"> <span>Privat mottagning</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Catering"> <span>Catering</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Hela studentdagen"> <span>Hela studentdagen</span></label>
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:.5rem">
+            <label for="f-date">Ungefärligt datum</label>
+            <input type="text" id="f-date" name="datum" placeholder="T.ex. juni 2025, osäker ännu">
+          </div>
+
+          <div class="field">
+            <label for="f-message">Övrig info / önskemål</label>
+            <textarea id="f-message" name="meddelande" placeholder="Antal gäster, budget, specifika önskemål eller bara en hälsning..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Skicka förfrågan &nbsp;→</button>
+          <p class="privacy">Vi delar aldrig dina uppgifter med tredje part. Svarstid inom 24h.</p>
+        </form>
+      </div>
+
+      <div class="success-msg" id="success-msg">
+        <div class="success-icon">✓</div>
+        <h3>Tack – vi hör av oss snart!</h3>
+        <p>Vi har tagit emot er förfrågan och återkommer inom 24 timmar med ett skräddarsytt upplägg.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-logo">STUDENTFIXARNA™</div>
-   <p>Studentfester som gynnar klassen – inte festfixarna.
-  <br>© 2026 Studentfixarna™ · studentfixarna.se · Alla rättigheter reserverade.</p>
+  <p>Studentfester som gynnar klassen – inte festfixarna.</p>
 </footer>
 
-<!-- ============================================================
-     JS
-     ============================================================ -->
 <script>
+/* ── Nav ── */
 function toggleMenu() {
   var m = document.getElementById('mobile-menu');
   var b = document.getElementById('burger');
@@ -1411,66 +1200,48 @@ function closeMenu() {
   document.getElementById('burger').classList.remove('open');
 }
 
-function handleSubmit() {
-  var fields = [
-    document.getElementById('f-name'),
-    document.getElementById('f-email'),
-    document.getElementById('f-phone'),
-    document.getElementById('f-school'),
-    document.getElementById('f-class')
-  ];
-  var valid = true;
+/* ── Formspree submit ── */
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var form = e.target;
 
-  fields.forEach(function(f) {
-    if (!f.value.trim()) {
-      f.classList.add('input-error'); valid = false;
-    } else {
-      f.classList.remove('input-error');
-    }
-  });
-
-  var checked = document.querySelectorAll('#checkboxes input:checked');
+  /* Require at least one checkbox */
+  var checked = form.querySelectorAll('input[name="hjalp"]:checked');
   var cbWrap  = document.getElementById('checkboxes');
   if (checked.length === 0) {
     cbWrap.style.outline      = '1.5px solid #D4785A';
     cbWrap.style.borderRadius = '8px';
     cbWrap.style.padding      = '8px';
-    valid = false;
-  } else {
-    cbWrap.style.outline = 'none';
-    cbWrap.style.padding = '0';
+    return;
   }
+  cbWrap.style.outline = 'none';
+  cbWrap.style.padding = '0';
 
-  if (!valid) return;
+  try {
+    var res = await fetch(form.action, {
+      method:  'POST',
+      body:    new FormData(form),
+      headers: { Accept: 'application/json' }
+    });
+    if (res.ok) {
+      document.getElementById('form-inner').style.display  = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    } else {
+      alert('Något gick fel. Försök igen eller maila oss direkt.');
+    }
+  } catch(err) {
+    alert('Något gick fel. Kontrollera din internetanslutning.');
+  }
+});
 
-  document.getElementById('form-inner').style.display  = 'none';
-  document.getElementById('success-msg').style.display = 'block';
-}
-
-document.querySelectorAll('input, textarea').forEach(function(el) {
-  el.addEventListener('input', function() { el.classList.remove('input-error'); });
+/* Clear error outline when user picks a checkbox */
+document.querySelectorAll('input[name="hjalp"]').forEach(function(cb) {
+  cb.addEventListener('change', function() {
+    document.getElementById('checkboxes').style.outline = 'none';
+    document.getElementById('checkboxes').style.padding = '0';
+  });
 });
 </script>
-<script>
-  document.getElementById("contact-form").addEventListener("submit", async function (e) {
-    e.preventDefault();
-  
-    const form = e.target;
-    const data = new FormData(form);
-  
-    try {
-      await fetch(form.action, {
-        method: "POST",
-        body: data,
-        headers: { "Accept": "application/json" }
-      });
-  
-      window.location.href = "tack.html";
-  
-    } catch (err) {
-      alert("Något gick fel. Försök igen.");
-    }
-  });
-  </script>
+
 </body>
 </html>
