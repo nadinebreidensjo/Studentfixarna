@@ -1256,10 +1256,10 @@ footer p { font-size: 12px; color: var(--muted); }
         <div class="form-card">
     
           <!-- FORMSPREE FORM START -->
-          <form action="https://formspree.io/f/mojrozwo" method="POST">
+          <form action="https://formspree.io/f/mojrozwo" method="POST" id="contact-form">
     
             <!-- Redirect till egen tack-sida -->
-          <input type="hidden" name="_next" value="tack.html">
+            <input type="hidden" name="_next" value="tack.html">
     
             <div class="form-row">
               <div class="field">
@@ -1417,6 +1417,26 @@ document.querySelectorAll('input, textarea').forEach(function(el) {
   el.addEventListener('input', function() { el.classList.remove('input-error'); });
 });
 </script>
-
+<script>
+  document.getElementById("contact-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+  
+    const form = e.target;
+    const data = new FormData(form);
+  
+    try {
+      await fetch(form.action, {
+        method: "POST",
+        body: data,
+        headers: { "Accept": "application/json" }
+      });
+  
+      window.location.href = "tack.html";
+  
+    } catch (err) {
+      alert("Något gick fel. Försök igen.");
+    }
+  });
+  </script>
 </body>
 </html>
