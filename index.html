@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="sv">
-<head>
+<head><meta name="description" content="Studentfixarna ordnar studentfester i Stockholm. Vi fixar allt – lokal, flak, mat och planering. All vinst går till klassen.">
+  <meta name="keywords" content="studentfest, student stockholm, flak, student 2026, studentfixarna">
+  <meta name="robots" content="index, follow">
+  
+  <link rel="canonical" href="https://studentfixarna.se/">
+  
+  <meta property="og:title" content="Studentfixarna – Studentfest på dina villkor">
+  <meta property="og:description" content="Vi fixar hela studentdagen. Ni behåller pengarna.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://studentfixarna.se/">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Studentfixarna – Studentfesten på dina villkor</title>
@@ -926,6 +935,30 @@ footer p { font-size: 12px; color: var(--muted); }
   h1 { font-size: clamp(1.6rem, 11vw, 2rem); }
   .hero-pill { font-size: 10px; }
 }
+/* ===== HERO RESPONSIVE FIX ===== */
+.hero h1 {
+  max-width: 12ch;
+  margin: 0 auto 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .hero h1 {
+    max-width: 100%;
+    line-height: 1.05;
+    font-size: clamp(1.8rem, 9vw, 2.6rem);
+  }
+
+  .hero-sub {
+    padding: 0 0.5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: 1.6rem;
+    line-height: 1.1;
+  }
+}
 </style>
 </head>
 <body>
@@ -1295,7 +1328,7 @@ footer p { font-size: 12px; color: var(--muted); }
             <div class="field">
               <label>Vad vill ni ha hjälp med?<span class="req">*</span></label>
     
-              <div class="checkboxes">
+              <div class="checkboxes" id="checkboxes">
                 <label class="checkbox-item">
                   <input type="checkbox" name="services" value="studentfest">
                   <span>Studentfest</span>
