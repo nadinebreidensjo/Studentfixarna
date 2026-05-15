@@ -65,6 +65,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1.5rem;
   padding: 1rem 2rem;
   background: rgba(30,27,24,0.92);
   backdrop-filter: blur(16px);
@@ -77,7 +78,7 @@ nav {
 
 .nav-logo {
   font-family: 'Syne', sans-serif;
-  font-size: 1.2rem;
+  font-size: clamp(.8rem, 3.5vw, 1.2rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   text-decoration: none;
@@ -86,13 +87,15 @@ nav {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: clamp(.75rem, 2vw, 2rem);
   list-style: none;
+  flex-shrink: 1;
 }
 
 .nav-links a {
@@ -113,6 +116,20 @@ nav {
   transition: opacity .15s, transform .15s !important;
 }
 .nav-cta:hover { opacity: .88 !important; transform: translateY(-1px) !important; }
+
+/* Boka nu – alltid synlig på mobil bredvid burgaren */
+.nav-cta-mobile {
+  display: none;
+  background: var(--grad);
+  color: #fff;
+  text-decoration: none;
+  padding: .38rem .9rem;
+  border-radius: var(--rp);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
 
 .nav-burger {
   display: none;
@@ -356,7 +373,7 @@ h2 {
 
 .pitch-sub {
   color: var(--text2);
-  max-width: 520px;
+  max-width: 680px;
   margin: 0 auto 3rem;
   font-size: 1rem;
   line-height: 1.8;
@@ -441,6 +458,8 @@ h2 {
   padding: 1.75rem 1.5rem;
   transition: border-color .2s, transform .2s, box-shadow .2s;
   box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
 }
 .svc:hover { border-color: var(--border3); box-shadow: var(--shadow); transform: translateY(-3px); }
 
@@ -453,6 +472,7 @@ h2 {
   justify-content: center;
   margin-bottom: 1rem;
   font-size: 20px;
+  flex-shrink: 0;
 }
 .ic1 { background: rgba(212,120,90,.14); }
 .ic2 { background: rgba(196,122,138,.14); }
@@ -465,11 +485,16 @@ h2 {
   color: var(--text);
   margin-bottom: .4rem;
 }
-.svc p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.svc p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  flex: 1; /* pushes tag to bottom */
+}
 
 .svc-tag {
   display: inline-block;
-  margin-top: .75rem;
+  margin-top: 1.25rem;
   font-size: 10.5px;
   font-weight: 700;
   letter-spacing: .05em;
@@ -479,6 +504,7 @@ h2 {
   background: rgba(255,240,220,.05);
   color: var(--muted);
   border: 1px solid var(--border2);
+  align-self: flex-start;
 }
 
 /* ============================================================
@@ -523,25 +549,60 @@ h2 {
 .vp-r { background: rgba(196,122,138,.14); color: var(--rose); }
 .vp-s { background: rgba(123,149,184,.14); color: var(--slate); }
 
+.venue-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.venue-feature {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.venue-feature h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: .92rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .4rem;
+}
+.venue-feature p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
 /* ============================================================
    REVIEWS
    ============================================================ */
 .reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1rem;
+  display: flex;
+  gap: 1.25rem;
   margin-top: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+  scrollbar-width: none;
+}
+.reviews-grid::-webkit-scrollbar { display: none; }
+.reviews-grid .review {
+  min-width: 300px;
+  max-width: 300px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
 }
 
 .review {
   background: var(--surface);
   border: 1px solid var(--border2);
   border-radius: var(--r);
-  padding: 1.5rem;
+  padding: 1.75rem;
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   gap: .85rem;
+  height: auto;
 }
 
 .review-stars { display: flex; gap: 3px; }
@@ -553,17 +614,17 @@ h2 {
 }
 
 .review q {
-  font-size: 13.5px;
+  font-size: 14px;
   color: var(--text2);
-  line-height: 1.7;
+  line-height: 1.75;
   font-style: italic;
   display: block;
   flex: 1;
 }
 
-.review-author { display: flex; align-items: center; gap: 10px; }
+.review-author { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: .85rem; border-top: 1px solid var(--border); }
 .review-avatar {
-  width: 34px; height: 34px;
+  width: 38px; height: 38px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-family: 'Syne', sans-serif;
@@ -575,8 +636,8 @@ h2 {
 .rav3 { background: rgba(123,149,184,.18); color: var(--slate); }
 .rav4 { background: rgba(212,169,106,.18); color: var(--gold); }
 
-.review-name { font-size: 13px; font-weight: 600; color: var(--text); }
-.review-meta { font-size: 12px; color: var(--muted); }
+.review-name { font-size: 13.5px; font-weight: 700; color: var(--text); }
+.review-meta { font-size: 12px; color: var(--muted); margin-top: 1px; }
 
 /* ============================================================
    HOW IT WORKS
@@ -715,7 +776,7 @@ input:focus, textarea:focus {
 
 textarea { resize: vertical; min-height: 105px; line-height: 1.6; }
 
-.checkboxes { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-top: .25rem; }
+.checkboxes { display: flex; flex-direction: column; gap: .6rem; margin-top: .25rem; }
 
 .checkbox-item { display: flex; align-items: center; gap: .5rem; cursor: pointer; }
 .checkbox-item input[type=checkbox] {
@@ -805,12 +866,20 @@ footer p { font-size: 12px; color: var(--muted); }
    ============================================================ */
 @media (max-width: 900px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .venue-feature-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (max-width: 640px) {
-  .nav-links  { display: none; }
-  .nav-burger { display: flex; }
-  nav         { padding: .85rem 1.25rem; }
+@media (max-width: 820px) {
+  .hero { padding: 3.25rem 1.25rem 2.75rem; }
+  .btns { flex-direction: column; align-items: center; }
+  .btn-main, .btn-sec { width: 100%; max-width: 300px; text-align: center; }
+}
+
+@media (max-width: 820px) {
+  .nav-links       { display: none; }
+  .nav-burger      { display: flex; }
+  .nav-cta-mobile  { display: inline-block; }
+  nav              { padding: .85rem 1.25rem; }
 
   .hero { padding: 3.25rem 1.25rem 2.75rem; }
 
@@ -834,6 +903,7 @@ footer p { font-size: 12px; color: var(--muted); }
 
   .stat-row      { grid-template-columns: 1fr; gap: .75rem; }
   .services-grid { grid-template-columns: 1fr; }
+  .venue-feature-grid { grid-template-columns: 1fr; }
   .pricing-cards { grid-template-columns: 1fr; gap: .75rem; }
 
   .callout     { flex-direction: column; gap: .75rem; }
@@ -863,6 +933,7 @@ footer p { font-size: 12px; color: var(--muted); }
     <li><a href="#reviews">Omdömen</a></li>
     <li><a href="#kontakt" class="nav-cta">Boka nu</a></li>
   </ul>
+  <a href="#kontakt" class="nav-cta-mobile" onclick="closeMenu()">Boka nu</a>
   <button class="nav-burger" id="burger" aria-label="Öppna meny" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>
@@ -934,40 +1005,40 @@ footer p { font-size: 12px; color: var(--muted); }
     <h2>Allt du drömmer om.</h2>
     <div class="services-grid">
       <div class="svc">
-        <div class="svc-icon ic1">🎉</div>
-        <h3>Studentfesten</h3>
+        <div class="svc-icon ic1">🎓</div>
+        <h3>Studentskiva</h3>
         <p>Rätt lokal, rätt vibe. Vi planerar hela festen – från lokal och mat till logistik och kvällens schema.</p>
         <span class="svc-tag">Populärast</span>
       </div>
       <div class="svc">
         <div class="svc-icon ic2">🚌</div>
-        <h3>Flak & transport</h3>
-        <p>Klassisk studentflak med rutt, dekorationer och allt koordinerat. Ni fokuserar på att ha kul.</p>
+        <h3>Studentflak & transport</h3>
+        <p>Vi anordnar alla typer av transport – från klassisk studentflak och buss till båt på sjön eller helikopter. Vi sköter rutt, dekorationer och logistik.</p>
         <span class="svc-tag">Studentdagen</span>
       </div>
       <div class="svc">
-        <div class="svc-icon ic3">☕</div>
-        <h3>Studentfrukost & catering</h3>
-        <p>Frukost på studentdagen eller mat till festen – vi sköter allt så ni slipper stå med tallrikar.</p>
-        <span class="svc-tag">Catering</span>
+        <div class="svc-icon ic3">🥂</div>
+        <h3>Champagnefrukost</h3>
+        <p>Slipp stressen på en av livets viktigaste dagar. Vi serverar frukost med bubbel och god mat – ni behöver inte lyfta ett finger.</p>
+        <span class="svc-tag">Studentmorgonen</span>
       </div>
       <div class="svc">
         <div class="svc-icon ic1">🏡</div>
         <h3>Privat studentmottagning</h3>
-        <p>Planerar ni en privat mottagning för hela kullen? Vi hjälper till – minimum 100 gäster.</p>
+        <p>Vi hjälper till med privata studentmottagningar på den stora dagen. Vi sköter lokal, mat och upplägg – ni är helt närvarande i stunden. Minimum 100 gäster.</p>
         <span class="svc-tag">Min. 100 gäster</span>
       </div>
       <div class="svc">
-        <div class="svc-icon ic2">📅</div>
-        <h3>Hela studentdagen</h3>
-        <p>Flak, frukost, middag och fest i ett paket. Ett ställe att hålla koll på – vi har resten.</p>
-        <span class="svc-tag">Hela paketet</span>
+        <div class="svc-icon ic2">🎉</div>
+        <h3>Insparksfest</h3>
+        <p>Välkomna nya studenter med en fest att minnas. Vi fixar lokal, upplägg och allt däremellan – ni sätter stämningen för åren som komma skall.</p>
+        <span class="svc-tag">Inspark</span>
       </div>
       <div class="svc">
-        <div class="svc-icon ic3">✨</div>
-        <h3>Insparksfest</h3>
-        <p>Välkomna nya studenter med stil. Kommer snart – hör av er om ni är intresserade.</p>
-        <span class="svc-tag">Kommer snart</span>
+        <div class="svc-icon ic3">⏳</div>
+        <h3>300–100-dagarsfesterna</h3>
+        <p>Markera varje milstolpe på vägen mot studenten. Vi hjälper er fira rätt längs hela resan – från 300 dagar kvar till den sista nerräkningen.</p>
+        <span class="svc-tag">Milstolpar</span>
       </div>
     </div>
   </div>
@@ -976,32 +1047,33 @@ footer p { font-size: 12px; color: var(--muted); }
 <!-- VENUES -->
 <section id="lokaler">
   <div class="inner">
-    <div class="sec-label">Våra samarbeten</div>
-    <h2>Lokaler vi älskar.</h2>
-    <div class="venue-grid">
-      <div class="venue-card">
-        <span class="venue-emoji">🏛️</span>
-        <h3>[Lokal 1]</h3>
-        <p>Plats för upp till XXX gäster. Perfekt för den stora studentmiddagen.</p>
-        <span class="venue-pill vp-a">Stor fest</span>
+    <div class="sec-label">Lokaler & venues</div>
+    <h2>Vi hittar rätt lokal för er.</h2>
+    <p style="color:var(--text2);max-width:720px;font-size:1.05rem;line-height:2.1;margin-bottom:2.5rem;letter-spacing:.01em">
+      Vi samarbetar med ett brett nätverk av restauranger, venues och eventlokaler i Stockholm. Oavsett om ni vill ha en intim middag för 50 personer eller en fullskalig fest för flera hundra – vi matchar er med en lokal som passar klassens stil, budget och datum.
+    </p>
+    <div class="venue-feature-grid">
+      <div class="venue-feature">
+        <div class="svc-icon ic1">🍽️</div>
+        <h3>Restauranger & brasserie</h3>
+        <p>Från mysiga restauranger till stora brasserie-lokaler. Vi har tillgång till platser med allt från husmanskost till findining.</p>
       </div>
-      <div class="venue-card">
-        <span class="venue-emoji">🍾</span>
-        <h3>[Lokal 2]</h3>
-        <p>Intim och exklusiv känsla. Populär för privata mottagningar.</p>
-        <span class="venue-pill vp-r">Mottagning</span>
+      <div class="venue-feature">
+        <div class="svc-icon ic2">🎵</div>
+        <h3>Nattklubb & festlokal</h3>
+        <p>Vill ni avsluta kvällen på dansgolvet? Vi samarbetar med venues med bra ljud, ljus och rätt stämning för studentfest.</p>
       </div>
-      <div class="venue-card">
-        <span class="venue-emoji">🎵</span>
-        <h3>[Lokal 3]</h3>
-        <p>Dancefloor och bra ljud. Kvällens fest når nästa nivå här.</p>
-        <span class="venue-pill vp-s">Nattklubb</span>
+      <div class="venue-feature">
+        <div class="svc-icon ic3">🌿</div>
+        <h3>Unika & exklusiva platser</h3>
+        <p>Takterrasser, sommarlokaler, historiska salar – vi hittar den där lokalen som gör er studentfest minnesvärd.</p>
       </div>
-      <div class="venue-card">
-        <span class="venue-emoji">🌿</span>
-        <h3>[Lokal 4]</h3>
-        <p>Friluftskänsla och unik atmosfär. Sommarfester i världsklass.</p>
-        <span class="venue-pill vp-a">Sommar</span>
+    </div>
+    <div class="callout" style="margin-top:2rem">
+      <div class="callout-bar"></div>
+      <div>
+        <h3>Fler lokaler tillkommer löpande</h3>
+        <p>Vi bygger kontinuerligt ut vårt nätverk. Hör av er med era önskemål – antal gäster, datum och känsla – så presenterar vi alternativ som passar just er klass.</p>
       </div>
     </div>
   </div>
@@ -1010,15 +1082,24 @@ footer p { font-size: 12px; color: var(--muted); }
 <!-- REVIEWS -->
 <section id="reviews" class="bg-alt">
   <div class="inner">
-    <div class="sec-label">Vad folk säger</div>
-    <h2>Röster från klasser vi hjälpt.</h2>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:.25rem;flex-wrap:wrap;gap:.5rem">
+      <div>
+        <div class="sec-label">Vad folk säger</div>
+        <h2 style="margin-bottom:0">Röster från klasser vi hjälpt.</h2>
+      </div>
+      <span style="font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;padding-bottom:.35rem">
+        <span style="display:inline-block;width:18px;height:1px;background:var(--muted)"></span>
+        Swipa för fler
+        <span style="display:inline-block;width:18px;height:1px;background:var(--muted)"></span>
+      </span>
+    </div>
     <div class="reviews-grid">
       <div class="review">
         <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
         <q>Helt otroligt smidigt. Vi hade knappt ett möte och ändå blev allt perfekt. Klassen fick ihop mer pengar än vi räknat med.</q>
         <div class="review-author">
           <div class="review-avatar rav1">EA</div>
-          <div><div class="review-name">Ella A.</div><div class="review-meta">Klassansvarig, NA-programmet 2024</div></div>
+          <div><div class="review-name">Ella A.</div><div class="review-meta">Klassansvarig,<br>NA-programmet 2024</div></div>
         </div>
       </div>
       <div class="review">
@@ -1026,7 +1107,7 @@ footer p { font-size: 12px; color: var(--muted); }
         <q>Vi hade testat ett annat bolag tidigare – det var inte ens nära. Studentfixarna svarade alltid snabbt och löste allt utan att vi behövde fråga.</q>
         <div class="review-author">
           <div class="review-avatar rav2">MK</div>
-          <div><div class="review-name">Marcus K.</div><div class="review-meta">Kassör, Ekonomiprogrammet 2024</div></div>
+          <div><div class="review-name">Marcus K.</div><div class="review-meta">Kassör,<br>Ekonomiprogrammet 2024</div></div>
         </div>
       </div>
       <div class="review">
@@ -1034,7 +1115,7 @@ footer p { font-size: 12px; color: var(--muted); }
         <q>Kontakten var helt klockren hela vägen. Aldrig orolig för att något skulle falla bort. Lokalen var en dröm och maten fantastisk.</q>
         <div class="review-author">
           <div class="review-avatar rav3">SL</div>
-          <div><div class="review-name">Sara L.</div><div class="review-meta">Klassansvarig, SA-programmet 2024</div></div>
+          <div><div class="review-name">Sara L.</div><div class="review-meta">Klassansvarig,<br>SA-programmet 2024</div></div>
         </div>
       </div>
       <div class="review">
@@ -1042,7 +1123,23 @@ footer p { font-size: 12px; color: var(--muted); }
         <q>Klassen tjänade in nästan dubbelt mot vad vi trodde. Inga konstiga avgifter, inga säljkrav. Bara en grym student.</q>
         <div class="review-author">
           <div class="review-avatar rav4">JB</div>
-          <div><div class="review-name">Johan B.</div><div class="review-meta">Klassrepresentant, TE-programmet 2023</div></div>
+          <div><div class="review-name">Johan B.</div><div class="review-meta">Klassrepresentant,<br>TE-programmet 2023</div></div>
+        </div>
+      </div>
+      <div class="review">
+        <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+        <q>Biljetthanteringen var guld värd. Ingen som glömde betala, ingen som kassören behövde jaga. Pengarna var alltid räknade och redovisade. Allt bara fungerade.</q>
+        <div class="review-author">
+          <div class="review-avatar rav1">FR</div>
+          <div><div class="review-name">Filippa R.</div><div class="review-meta">Klassansvarig & kassör,<br>IB-programmet 2024</div></div>
+        </div>
+      </div>
+      <div class="review">
+        <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+        <q>Vi visste inte ens vad vi ville ha – de kom med förslag, fixade lokalen och skötte allt. Vi behövde bara dyka upp och ha kul.</q>
+        <div class="review-author">
+          <div class="review-avatar rav3">AL</div>
+          <div><div class="review-name">Anton L.</div><div class="review-meta">Klassansvarig,<br>HU-programmet 2024</div></div>
         </div>
       </div>
     </div>
@@ -1053,7 +1150,7 @@ footer p { font-size: 12px; color: var(--muted); }
 <section id="hur">
   <div class="inner">
     <div class="sec-label">Hur det funkar</div>
-    <h2>Från idé till legendar-student.</h2>
+    <h2>Från idé till legendarisk student.</h2>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
@@ -1092,7 +1189,7 @@ footer p { font-size: 12px; color: var(--muted); }
   <div class="inner">
     <div class="sec-label">Priset</div>
     <h2>Enkelt, ärligt, transparent.</h2>
-    <p style="color:var(--text2);max-width:480px;margin:.5rem auto 0;font-size:.95rem;line-height:1.75">
+    <p style="color:var(--text2);max-width:680px;margin:.5rem auto 0;font-size:.95rem;line-height:1.75">
       Vi tar ett fast arvode beroende på festens storlek. Allt utöver det – är ert.
     </p>
     <div class="pricing-cards">
@@ -1103,16 +1200,58 @@ footer p { font-size: 12px; color: var(--muted); }
       </div>
       <div class="pcard">
         <div class="pcard-label">Er intäkt</div>
-        <div class="pcard-val">Allt biljetterna ger</div>
-        <p>Biljettintäkterna går tillbaka till klassen.</p>
+        <div class="pcard-val">100% av<br>biljettintäkterna</div>
+        <p>All försäljning går tillbaka till klassen.</p>
       </div>
       <div class="pcard">
         <div class="pcard-label">Krav på er</div>
         <div class="pcard-val">Noll</div>
-        <p>Sälj inga tillägg, inga andras produkter.</p>
+        <p>Inga krav på att sälja tillägg eller andras produkter. Ni säljer bara biljetter.</p>
       </div>
     </div>
-    <p class="pricing-note">Vill ni ha ett exakt prisförslag? Hör av er – vi räknar på just er fest utan förpliktelser.</p>
+    <p class="pricing-note" style="max-width:680px">Vill ni ha ett exakt prisförslag? Hör av er – vi räknar på just er fest utan förpliktelser.</p>
+  </div>
+</section>
+
+<!-- BILJETTER -->
+<section id="biljetter">
+  <div class="inner">
+    <div class="sec-label">Digital biljettförsäljning</div>
+    <h2>Inga Swish-listor.<br>Ingen stress.</h2>
+    <p style="color:var(--text2);max-width:780px;font-size:1.05rem;line-height:2.1;margin-bottom:2.5rem;letter-spacing:.01em">
+      Vi sätter upp ett digitalt biljettsystem för er fest. Klassens gäster köper sina biljetter online – smidigt, säkert och utan att kassören behöver jaga betalningar i Messenger.
+    </p>
+    <div class="stat-row" style="max-width:700px;margin:0 auto">
+      <div class="stat">
+        <div class="stat-num">0 kr</div>
+        <p>Pengar att hantera manuellt – allt sköts digitalt</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <p>Koll på ekonomin – all försäljning på ett ställe</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Noll</div>
+        <p>Svinn – digitala biljetter går inte att kopiera eller förlora</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:2rem">
+      <div class="svc">
+        <div class="svc-icon ic1">📱</div>
+        <h3>Digital inköp</h3>
+        <p>Gästerna köper biljetter online via en länk ni delar. Inget kontant, inget Swish fram och tillbaka.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-icon ic2">📊</div>
+        <h3>Realtidsöversikt</h3>
+        <p>Ni ser löpande hur många biljetter som sålts och hur mycket pengar som är inne – live.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-icon ic3">💸</div>
+        <h3>Pengarna till klassen</h3>
+        <p>Intäkterna samlas och betalas ut direkt till klassen. Transparent, enkelt och utan mellanhänder.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1121,7 +1260,7 @@ footer p { font-size: 12px; color: var(--muted); }
   <div class="contact-inner">
     <div class="sec-label">Kom igång</div>
     <h2>Redo att boka en student att minnas?</h2>
-    <p class="contact-intro">Fyll i formuläret så hör vi av oss inom 24 timmar med ett skräddarsytt upplägg för er klass.</p>
+    <p class="contact-intro" style="max-width:520px">Fyll i formuläret så hör vi av oss inom 24 timmar med ett skräddarsytt upplägg för er klass.</p>
 
     <div class="form-card">
       <div id="form-inner">
@@ -1158,12 +1297,11 @@ footer p { font-size: 12px; color: var(--muted); }
           <div class="field">
             <label>Vad vill ni ha hjälp med?<span class="req">*</span></label>
             <div class="checkboxes" id="checkboxes">
-              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Studentfest"> <span>Studentfest</span></label>
-              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Flak & transport"> <span>Flak & transport</span></label>
-              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Studentfrukost"> <span>Studentfrukost</span></label>
-              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Privat mottagning"> <span>Privat mottagning</span></label>
-              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Catering"> <span>Catering</span></label>
-              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Hela studentdagen"> <span>Hela studentdagen</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Studentskiva"> <span>🎓 Studentskiva</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Studentflak & transporter"> <span>🚌 Studentflak & transporter</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Champagnefrukost"> <span>🥂 Champagnefrukost</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Inspark & 100-dagarsfesterna"> <span>🎉 Inspark & 100-dagarsfesterna</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Privat studentmottagning (min. 100 pers)"> <span>🏡 Privat studentmottagning<br><small style="color:var(--muted);font-weight:500;margin-left:1.5rem">(minimum 100 pers)</small></span></label>
             </div>
           </div>
 
@@ -1183,19 +1321,63 @@ footer p { font-size: 12px; color: var(--muted); }
       </div>
 
       <div class="success-msg" id="success-msg">
-        <div class="success-icon">✓</div>
-        <h3>Tack – vi hör av oss snart!</h3>
-        <p>Vi har tagit emot er förfrågan och återkommer inom 24 timmar med ett skräddarsytt upplägg.</p>
+        <div class="success-icon">🎓</div>
+        <h3>Vad kul att ni har börjat planera!</h3>
+        <p>Kul att ni vill ha vår hjälp med er stund. Vi återkommer inom 24h med ett skräddarsytt förslag – håll utkik i inkorgen!</p>
+        <div style="margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--border2)">
+          <p style="font-size:12px;color:var(--muted);margin-bottom:.75rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600">Följ oss på</p>
+          <div style="display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap">
+            <a href="https://www.instagram.com/studentfixarna.se" target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#D4785A 0%,#C47A8A 55%,#7B95B8 100%);border:none;border-radius:50px;padding:.55rem 1.2rem;text-decoration:none;color:#fff;font-size:12.5px;font-weight:700;box-shadow:0 4px 18px rgba(212,120,90,.28)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+              Instagram
+            </a>
+            <a href="https://www.tiktok.com/@studentfixarna" target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#D4785A 0%,#C47A8A 55%,#7B95B8 100%);border:none;border-radius:50px;padding:.55rem 1.2rem;text-decoration:none;color:#fff;font-size:12.5px;font-weight:700;box-shadow:0 4px 18px rgba(212,120,90,.28)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+              </svg>
+              TikTok
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- SOCIALS -->
+<div style="text-align:center;padding:3rem 1.5rem;background:var(--bg);border-top:1px solid var(--border)">
+  <p style="font-size:12px;color:var(--muted);margin-bottom:.75rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600">Följ oss på</p>
+  <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap">
+    <a href="https://www.instagram.com/studentfixarna.se" target="_blank" rel="noopener"
+       style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#D4785A 0%,#C47A8A 55%,#7B95B8 100%);border:none;border-radius:50px;padding:.6rem 1.4rem;text-decoration:none;color:#fff;font-size:13px;font-weight:700;box-shadow:0 4px 18px rgba(212,120,90,.28);transition:opacity .15s,transform .15s"
+       onmouseover="this.style.opacity='.88';this.style.transform='translateY(-1px)'"
+       onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+      </svg>
+      Instagram
+    </a>
+    <a href="https://www.tiktok.com/@studentfixarna" target="_blank" rel="noopener"
+       style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#D4785A 0%,#C47A8A 55%,#7B95B8 100%);border:none;border-radius:50px;padding:.6rem 1.4rem;text-decoration:none;color:#fff;font-size:13px;font-weight:700;box-shadow:0 4px 18px rgba(212,120,90,.28);transition:opacity .15s,transform .15s"
+       onmouseover="this.style.opacity='.88';this.style.transform='translateY(-1px)'"
+       onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+      </svg>
+      TikTok
+    </a>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">STUDENTFIXARNA™</div>
-  <p>Studentfester som gynnar klassen – inte festfixarna.<br>
-© 2026 Studentfixarna™ · studentfixarna.se · Alla rättigheter reserverade.</p>
+  <p style="margin-bottom:.75rem">Studentfester som gynnar klassen – inte festfixarna.</p>
+  <p>© 2026 Studentfixarna™ · Alla rättigheter reserverade.</p>
 </footer>
 
 <script>
