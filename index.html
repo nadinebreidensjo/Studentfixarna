@@ -1067,11 +1067,12 @@ footer p { font-size: 12px; color: var(--muted); }
 }
 
 /* All sections above page lights */
-nav, .mobile-menu, section, footer, .strip,
+.mobile-menu, section, footer, .strip,
 #kontakt > .contact-inner, .contact-inner {
   position: relative;
   z-index: 1;
 }
+nav { z-index: 200; }
 
 /* Hero needs relative for its own light layer */
 .hero { position: relative; overflow: hidden; }
