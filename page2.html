@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<!-- SEO -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studentfixarna – Studentfesten på dina villkor</title>
+<meta name="description" content="Studentfixarna ordnar studentfester i Stockholm. Vi fixar allt – lokal, flak, mat och planering. All vinst går till klassen.">
+<meta name="keywords" content="studentfest, student stockholm, flak, student 2026, studentfixarna">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://studentfixarna.se/">
+<meta property="og:title" content="Studentfixarna – Studentfest på dina villkor">
+<meta property="og:description" content="Vi fixar hela studentdagen. Ni behåller pengarna.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://studentfixarna.se/">
+<meta property="og:image" content="https://studentfixarna.se/og-image.png">
+<meta property="og:image:width" content="630">
+<meta property="og:image:height" content="1200">
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET & TOKENS
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0A0A0C;
+  --bg2:       #0E0E12;
+  --surface:   #100E0C;
+  --surface2:  #161311;
+  --border:    rgba(255,255,255,0.14);
+  --border2:   rgba(255,255,255,0.22);
+  --border3:   rgba(255,255,255,0.32);
+  --text:      #FFFFFF;
+  --text2:     #D8D4CC;
+  --muted:     #A89E95;
+  --muted2:    #7A7068;
+  --accent:    #A0A0A8;
+  --rose:      #C8C4BC;
+  --slate:     #D0CEC8;
+  --gold:      #E8E4DC;
+  --grad:      linear-gradient(115deg, #606068 0%, #D8D6D2 22%, #F2F0EC 40%, #E8E4DC 55%, #A0A0A8 75%, #D0CEC8 100%);
+  --grad2:     linear-gradient(115deg, #606068, #D8D6D2, #F2F0EC);
+  --r:   0px;
+  --r2:  0px;
+  --rp:  0px;
+  --shadow-sm: 0 1px 4px rgba(0,0,0,.25);
+  --shadow:    0 4px 20px rgba(0,0,0,.30);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.40);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: radial-gradient(ellipse at 20% 10%, #1A1820 0%, #080808 40%, #0C0A10 70%, #080808 100%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1rem 2rem;
+  background: rgba(30,27,24,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(.8rem, 3.5vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(.75rem, 2vw, 2rem);
+  list-style: none;
+  flex-shrink: 1;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+.nav-cta {
+  background: var(--grad) !important;
+  color: #080808 !important;
+  padding: .42rem 1.15rem;
+  border-radius: var(--rp);
+  font-weight: 600 !important;
+  transition: opacity .15s, transform .15s !important;
+}
+.nav-cta:hover { opacity: .88 !important; transform: translateY(-1px) !important; }
+
+/* Boka nu – alltid synlig på mobil bredvid burgaren */
+.nav-cta-mobile {
+  display: none;
+  background: var(--grad);
+  color: #fff;
+  text-decoration: none;
+  padding: .38rem .9rem;
+  border-radius: var(--rp);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  border: none;
+  background: transparent;
+}
+.nav-burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text2);
+  border-radius: 2px;
+  transition: transform .25s, opacity .25s;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 57px;
+  z-index: 199;
+  box-shadow: var(--shadow);
+}
+.mobile-menu a {
+  display: block;
+  padding: .9rem 2rem;
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+  transition: background .15s;
+}
+.mobile-menu a:hover { background: var(--surface2); }
+.mobile-menu a.cta-mob {
+  background: var(--grad);
+  color: #1E1B18;
+  font-weight: 700;
+  border-bottom: none;
+  text-align: center;
+}
+.mobile-menu.open { display: flex; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  padding: 5.5rem 1.5rem 5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 500px;
+  background: radial-gradient(ellipse,
+    rgba(212,120,90,.13) 0%,
+    rgba(196,104,138,.08) 45%,
+    transparent 70%);
+  pointer-events: none;
+}
+
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,240,220,0.06);
+  border: 1px solid var(--border2);
+  border-radius: var(--rp);
+  padding: .32rem .9rem .32rem .5rem;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+}
+
+.hero-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--grad);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.55rem, 5vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+}
+
+/*
+ * FIX 2: .grad-text är INLINE (ingen display:block) på desktop
+ * så att "Klasskassan tackar." sitter på rad 2 tack vare
+ * att h1 är nowrap och .grad-text är ett inline-element som
+ * "hänger" på nästa rad naturligt.
+ * På mobil: white-space:normal + display:block = egna rader.
+ */
+.grad-text {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block; /* alltid på egen rad */
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text2);
+  max-width: 460px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.75;
+}
+
+.btns {
+  display: flex;
+  gap: .75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-main {
+  background: var(--grad);
+  color: #080808;
+  border: none;
+  padding: .85rem 2.1rem;
+  border-radius: var(--rp);
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: opacity .15s, transform .15s, box-shadow .15s;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 18px rgba(160,160,168,.20);
+}
+.btn-main:hover { opacity: .88; transform: translateY(-2px); }
+
+.btn-sec {
+  background: transparent;
+  color: var(--text2);
+  border: 1.5px solid rgba(255,255,255,.45);
+  padding: .85rem 2.1rem;
+  border-radius: var(--rp);
+  font-size: 14.5px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: border-color .2s, color .2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-sec:hover { border-color: var(--accent); color: var(--text); }
+
+/* ============================================================
+   STRIP
+   ============================================================ */
+.strip {
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.strip-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: .95rem 1.25rem;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+  border-right: 1px solid var(--border);
+  flex: 1;
+  min-width: 140px;
+}
+.strip-item:last-child { border-right: none; }
+
+.strip-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.sd-a { background: var(--accent); }
+.sd-r { background: var(--rose); }
+.sd-s { background: var(--slate); }
+.sd-g { background: var(--gold); }
+
+/* ============================================================
+   SHARED
+   ============================================================ */
+section { padding: 5rem 1.5rem; }
+
+.sec-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .5rem;
+}
+
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  margin-bottom: .9rem;
+}
+
+.inner { max-width: 960px; margin: 0 auto; }
+.bg-alt { background: var(--bg2); }
+
+/* ============================================================
+   PITCH
+   ============================================================ */
+.pitch { text-align: center; }
+
+.pitch-sub {
+  color: var(--text2);
+  max-width: 680px;
+  margin: 0 auto 3rem;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: .4rem;
+}
+
+.stat p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+.callout {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 1.75rem;
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  max-width: 680px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+}
+
+.callout-bar {
+  width: 3px;
+  min-width: 3px;
+  border-radius: 3px;
+  background: var(--grad2);
+  align-self: stretch;
+  min-height: 40px;
+}
+
+.callout h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .3rem;
+}
+.callout p { font-size: 13.5px; color: var(--text2); line-height: 1.65; }
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .75rem;
+  margin-top: 1.25rem;
+}
+
+.svc {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 1.1rem 1.25rem;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+.svc:hover { border-color: var(--border3); box-shadow: var(--shadow); transform: translateY(-3px); }
+
+
+.ic1 { background: rgba(212,120,90,.14); }
+.ic2 { background: rgba(196,104,138,.14); }
+.ic3 { background: rgba(123,149,184,.14); }
+
+.svc h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: .92rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .4rem;
+}
+.svc p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  flex: 1; /* pushes tag to bottom */
+}
+
+.svc-tag {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: .22rem .65rem;
+  border-radius: var(--rp);
+  background: rgba(255,240,220,.05);
+  color: var(--muted);
+  border: 1px solid var(--border2);
+  align-self: flex-start;
+}
+
+/* ============================================================
+   VENUES
+   ============================================================ */
+.venue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.venue-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 1.5rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+.venue-card:hover { border-color: rgba(212,120,90,.4); transform: translateY(-3px); box-shadow: var(--shadow); }
+
+.venue-emoji { font-size: 1.6rem; margin-bottom: .6rem; display: block; }
+.venue-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .25rem;
+}
+.venue-card p { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+.venue-pill {
+  display: inline-block;
+  margin-top: .6rem;
+  font-size: 11px;
+  padding: .2rem .65rem;
+  border-radius: var(--rp);
+  font-weight: 600;
+}
+.vp-a { background: rgba(212,120,90,.14);  color: var(--accent); }
+.vp-r { background: rgba(196,104,138,.14); color: var(--rose); }
+.vp-s { background: rgba(123,149,184,.14); color: var(--slate); }
+
+.venue-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.venue-feature {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.venue-feature h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: .92rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .4rem;
+}
+.venue-feature p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ============================================================
+   REVIEWS
+   ============================================================ */
+.reviews-wrap {
+  position: relative;
+}
+.reviews-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 1rem;
+  width: 100px;
+  background: linear-gradient(to right, transparent, var(--bg2));
+  pointer-events: none;
+  z-index: 1;
+}
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 1px solid var(--border3);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .15s;
+  box-shadow: var(--shadow);
+}
+.scroll-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-50%) scale(1.08);
+}
+.scroll-btn.prev { left: -16px; }
+.scroll-btn.next { right: -16px; }
+.scroll-btn svg  { flex-shrink: 0; }
+.reviews-grid {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+  padding-right: 2rem;
+  scrollbar-width: none;
+}
+.reviews-grid::-webkit-scrollbar { display: none; }
+.reviews-grid .review {
+  min-width: 300px;
+  max-width: 300px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* Bouncing arrow hint */
+.scroll-hint-arrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  animation: bounceX 1.4s ease-in-out infinite;
+}
+.scroll-hint-arrow svg { flex-shrink: 0; }
+@keyframes bounceX {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(5px); }
+}
+
+.review {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  height: auto;
+}
+
+.review-stars { display: flex; gap: 3px; }
+.star {
+  width: 13px; height: 13px;
+  background: var(--gold);
+  clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  display: inline-block;
+}
+
+.review q {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.75;
+  font-style: italic;
+  display: block;
+  flex: 1;
+}
+
+.review-author { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: .85rem; border-top: 1px solid var(--border); }
+.review-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 12px; font-weight: 700;
+  flex-shrink: 0;
+}
+.rav1 { background: rgba(212,120,90,.18);  color: var(--accent); }
+.rav2 { background: rgba(196,104,138,.18); color: var(--rose); }
+.rav3 { background: rgba(123,149,184,.18); color: var(--slate); }
+.rav4 { background: rgba(212,169,106,.18); color: var(--gold); }
+
+.review-name { font-size: 13.5px; font-weight: 700; color: var(--text); }
+.review-meta { font-size: 12px; color: var(--muted); margin-top: 1px; }
+
+/* ============================================================
+   HOW IT WORKS
+   ============================================================ */
+.steps { display: flex; flex-direction: column; margin-top: 2.25rem; max-width: 600px; }
+
+.step {
+  display: flex; gap: 1.25rem;
+  align-items: flex-start;
+  padding-bottom: 2rem;
+  position: relative;
+}
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 15px; top: 34px; bottom: 0;
+  width: 1px;
+  background: var(--border2);
+}
+
+.step-num {
+  width: 32px; height: 32px; min-width: 32px;
+  border-radius: 50%;
+  background: var(--grad);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: .82rem; font-weight: 800;
+  color: #fff;
+  position: relative; z-index: 1;
+  box-shadow: 0 2px 10px rgba(160,160,168,.18);
+}
+
+.step-body { padding-top: .2rem; }
+.step-body h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: .95rem; font-weight: 700;
+  color: var(--text); margin-bottom: .3rem;
+}
+.step-body p { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 700px;
+  margin: 2rem auto 0;
+}
+
+.pcard {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.pcard-label {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: .6rem;
+}
+.pcard-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.35rem; font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: .35rem;
+}
+.pcard p { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+.pricing-note {
+  font-size: 13px; color: var(--muted);
+  max-width: 440px; margin: 1.5rem auto 0;
+  text-align: center; line-height: 1.65;
+}
+
+/* ============================================================
+   CONTACT FORM
+   ============================================================ */
+.contact-inner { max-width: 600px; margin: 0 auto; text-align: center; }
+
+.contact-intro {
+  color: var(--text2);
+  font-size: .98rem; line-height: 1.75;
+  margin-bottom: 2.25rem;
+}
+
+.form-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r2);
+  padding: 2.25rem 2rem;
+  text-align: left;
+  box-shadow: var(--shadow);
+}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.field { display: flex; flex-direction: column; gap: .42rem; margin-bottom: 1rem; }
+
+label { font-size: 12.5px; font-weight: 600; color: var(--text2); }
+.req  { color: var(--accent); margin-left: 2px; }
+
+input[type=text],
+input[type=email],
+input[type=tel],
+textarea {
+  background: var(--surface2);
+  border: 1.5px solid var(--border2);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  padding: .7rem .95rem;
+  transition: border-color .2s, box-shadow .2s;
+  outline: none;
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+input::placeholder, textarea::placeholder { color: var(--muted2); }
+input:focus, textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(160,160,168,.15);
+}
+.input-error {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(160,160,168,.15) !important;
+}
+
+textarea { resize: vertical; min-height: 105px; line-height: 1.6; }
+
+.checkboxes { display: flex; flex-direction: column; gap: .6rem; margin-top: .25rem; }
+
+.checkbox-item { display: flex; align-items: center; gap: .5rem; cursor: pointer; }
+.checkbox-item input[type=checkbox] {
+  width: 17px; height: 17px; min-width: 17px;
+  border-radius: 5px; cursor: pointer;
+  accent-color: var(--accent);
+  padding: 0; border: none;
+  background: var(--surface2);
+}
+.checkbox-item span { font-size: 13.5px; color: var(--text2); }
+
+.divider { height: 1px; background: var(--border2); margin: 1.25rem 0; }
+
+.submit-btn {
+  width: 100%;
+  background: var(--grad);
+  border: none;
+  border-radius: var(--rp);
+  color: #080808;
+  font-family: 'Syne', sans-serif;
+  font-size: 15px; font-weight: 800;
+  padding: .95rem 2rem;
+  cursor: pointer;
+  transition: opacity .15s, transform .15s;
+  margin-top: 1.25rem;
+  letter-spacing: .01em;
+  box-shadow: 0 4px 18px rgba(160,160,168,.20);
+}
+.submit-btn:hover { opacity: .88; transform: translateY(-1px); }
+
+.privacy {
+  text-align: center; margin-top: .85rem;
+  font-size: 12px; color: var(--muted); line-height: 1.6;
+}
+
+/*
+ * FIX 3: Success-popup – snygg och centrerad i form-kortet
+ */
+.success-msg {
+  display: none;
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+.success-icon {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: rgba(160,160,168,.12);
+  border: 1.5px solid rgba(160,160,168,.22);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.25rem;
+  font-size: 28px;
+  color: var(--accent);
+}
+.success-msg h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem; font-weight: 800;
+  color: var(--text); margin-bottom: .5rem;
+}
+.success-msg p {
+  font-size: 14.5px; color: var(--text2);
+  line-height: 1.7; max-width: 380px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem; font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: .35rem;
+}
+footer p { font-size: 12px; color: var(--muted); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .venue-feature-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 820px) {
+  .hero { padding: 3.25rem 1.25rem 2.75rem; }
+  .btns { flex-direction: column; align-items: center; }
+  .btn-main, .btn-sec { width: 100%; max-width: 300px; text-align: center; }
+}
+
+@media (max-width: 820px) {
+  .nav-links       { display: none; }
+  .nav-burger      { display: flex; }
+  .nav-cta-mobile  { display: inline-block; }
+  nav              { padding: .85rem 1.25rem; }
+
+  .hero { padding: 3.25rem 1.25rem 2.75rem; }
+
+  h1 {
+    font-size: clamp(1.55rem, 8.5vw, 2.4rem);
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+  }
+
+  .hero-sub { font-size: .95rem; }
+  .btns     { flex-direction: column; align-items: center; }
+  .btn-main,
+  .btn-sec  { width: 100%; max-width: 300px; text-align: center; }
+
+  .strip-item { min-width: 50%; flex: 0 0 50%; border-bottom: 1px solid var(--border); }
+  .strip-item:nth-child(2n)  { border-right: none; }
+  .strip-item:nth-child(3),
+  .strip-item:nth-child(4)   { border-bottom: none; }
+
+  section { padding: 3rem 1.25rem; }
+
+  .stat-row      { grid-template-columns: 1fr; gap: .75rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .venue-feature-grid { grid-template-columns: 1fr; }
+  .pricing-cards { grid-template-columns: 1fr; gap: .75rem; }
+
+  .callout     { flex-direction: column; gap: .75rem; }
+  .callout-bar { width: 100%; height: 3px; min-height: 0; min-width: unset; }
+
+  .form-card  { padding: 1.5rem 1.1rem; }
+  .form-row   { grid-template-columns: 1fr; gap: 0; }
+  .checkboxes { grid-template-columns: 1fr; }
+
+  h2 { font-size: clamp(1.45rem, 7vw, 2rem); }
+}
+
+@media (max-width: 380px) {
+  h1 { font-size: clamp(1.4rem, 9vw, 1.75rem); }
+  .hero-pill { font-size: 10px; }
+}
+
+
+/* Big soft orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  animation: orbFloat var(--dur, 10s) ease-in-out infinite;
+  animation-delay: var(--dl, 0s);
+}
+@keyframes orbFloat {
+  0%,100% { opacity: var(--o1, .15); transform: translate(0,0) scale(1); }
+  50%      { opacity: var(--o2, .25); transform: translate(var(--mx,0px), var(--my,0px)) scale(var(--sc,1.15)); }
+}
+
+/* Small glow pulses */
+.glow-dot {
+  position: absolute;
+  border-radius: 50%;
+  animation: glowPulse var(--gd, 3s) ease-in-out infinite;
+  animation-delay: var(--gdl, 0s);
+}
+@keyframes glowPulse {
+  0%,100% { opacity: var(--go1, .08); transform: scale(1); }
+  50%      { opacity: var(--go2, .22); transform: scale(1.3); }
+}
+
+/* Sweeping strobe beams */
+
+
+
+
+
+/* ============================================================
+   LIGHT EFFECTS
+   ============================================================ */
+
+/* Hero strobe + orbs */
+.hero-lights {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  animation: orbFloat var(--dur,10s) ease-in-out infinite;
+  animation-delay: var(--dl,0s);
+}
+@keyframes orbFloat {
+  0%,100% { opacity:var(--o1,.18); transform:translate(0,0) scale(1); }
+  50%      { opacity:var(--o2,.30); transform:translate(var(--mx,0px),var(--my,0px)) scale(var(--sc,1.2)); }
+}
+
+
+
+/* Hero content sits above lights */
+.hero-content { position:relative; z-index:1; }
+
+/* Page-wide background orbs – fixed, no strobe */
+.page-lights {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.page-orb {
+  position: absolute;
+  border-radius: 50%;
+  animation: orbFloat var(--dur,12s) ease-in-out infinite;
+  animation-delay: var(--dl,0s);
+}
+
+/* Glow dots */
+.glow-dot {
+  position: absolute;
+  border-radius: 50%;
+  animation: glowPulse var(--gd,4s) ease-in-out infinite;
+  animation-delay: var(--gdl,0s);
+}
+@keyframes glowPulse {
+  0%,100% { opacity:var(--go1,.07); transform:scale(1); }
+  50%      { opacity:var(--go2,.20); transform:scale(1.3); }
+}
+
+/* All sections above page lights */
+.mobile-menu, section, footer, .strip,
+#kontakt > .contact-inner, .contact-inner {
+  position: relative;
+  z-index: 1;
+}
+nav { z-index: 200; }
+
+/* Hero needs relative for its own light layer */
+.hero { position: relative; overflow: hidden; }
+
+/* TRANSPARENT CARDS – light shines through */
+.svc       { background: rgba(6,5,4,.92) !important; backdrop-filter:blur(8px); }
+.stat      { background: rgba(6,5,4,.92) !important; backdrop-filter:blur(8px); }
+.review    { background: rgba(6,5,4,.92) !important; backdrop-filter:blur(8px); }
+.venue-card    { background: rgba(6,5,4,.92) !important; backdrop-filter:blur(8px); }
+.venue-feature { background: rgba(6,5,4,.92) !important; backdrop-filter:blur(8px); }
+.pcard         { background: rgba(6,5,4,.92) !important; backdrop-filter:blur(8px); }
+.form-card     { background: rgba(6,5,4,.95) !important; backdrop-filter:blur(10px); }
+.callout       { background: rgba(6,5,4,.92) !important; backdrop-filter:blur(8px); }
+.step-num      { position:relative; z-index:1; }
+
+
+/* Gradient borders on cards */
+.svc, .stat, .review, .venue-card, .venue-feature, .pcard, .callout {
+  border: 1px solid transparent !important;
+  background-clip: padding-box !important;
+  position: relative;
+}
+.svc::after, .stat::after, .review::after,
+.venue-card::after, .venue-feature::after,
+.pcard::after, .callout::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(115deg, #A0A0AA 0%, #FFFFFF 35%, #D8D6D2 60%, #A0A0B0 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+</style>
+</head>
+<body>
+<!-- PAGE BACKGROUND LIGHTS (no strobe – full page) -->
+<div class="page-lights" aria-hidden="true">
+  <div class="page-orb" style="width:420px;height:420px;background:radial-gradient(circle,rgba(160,160,168,.85) 0%,transparent 65%);top:5vh;left:-80px;filter:blur(65px);--dur:13s;--dl:0s;--o1:.14;--o2:.24;--mx:60px;--my:80px;--sc:1.15"></div>
+  <div class="page-orb" style="width:380px;height:380px;background:radial-gradient(circle,rgba(208,206,200,.85) 0%,transparent 65%);top:10vh;right:-60px;filter:blur(60px);--dur:11s;--dl:1s;--o1:.12;--o2:.22;--mx:-70px;--my:60px;--sc:1.2"></div>
+  <div class="page-orb" style="width:340px;height:340px;background:radial-gradient(circle,rgba(232,228,220,.85) 0%,transparent 65%);top:40vh;left:30%;filter:blur(55px);--dur:10s;--dl:1.5s;--o1:.11;--o2:.20;--mx:40px;--my:-50px;--sc:1.15"></div>
+  <div class="page-orb" style="width:360px;height:360px;background:radial-gradient(circle,rgba(160,160,168,.85) 0%,transparent 65%);top:65vh;left:-50px;filter:blur(58px);--dur:14s;--dl:2s;--o1:.13;--o2:.22;--mx:70px;--my:-40px;--sc:1.1"></div>
+  <div class="page-orb" style="width:320px;height:320px;background:radial-gradient(circle,rgba(208,206,200,.85) 0%,transparent 65%);top:80vh;right:-40px;filter:blur(52px);--dur:12s;--dl:3s;--o1:.13;--o2:.24;--mx:-60px;--my:-30px;--sc:1.1"></div>
+  <div class="page-orb" style="width:300px;height:300px;background:radial-gradient(circle,rgba(232,228,220,.85) 0%,transparent 65%);top:120vh;left:45%;filter:blur(50px);--dur:11s;--dl:2.5s;--o1:.11;--o2:.20;--mx:-40px;--my:50px;--sc:1.15"></div>
+  <div class="page-orb" style="width:280px;height:280px;background:radial-gradient(circle,rgba(160,160,168,.85) 0%,transparent 65%);top:150vh;right:15%;filter:blur(48px);--dur:13s;--dl:1s;--o1:.12;--o2:.22;--mx:50px;--my:-50px;--sc:1.1"></div>
+
+  <div class="glow-dot" style="width:50px;height:50px;background:radial-gradient(circle,rgba(160,160,168,.9),transparent);top:15%;left:18%;filter:blur(12px);--gd:4s;--gdl:0s;--go1:.09;--go2:.24"></div>
+  <div class="glow-dot" style="width:42px;height:42px;background:radial-gradient(circle,rgba(208,206,200,.9),transparent);top:28%;left:75%;filter:blur(10px);--gd:3.5s;--gdl:.6s;--go1:.09;--go2:.22"></div>
+  <div class="glow-dot" style="width:38px;height:38px;background:radial-gradient(circle,rgba(232,228,220,.9),transparent);top:50%;left:6%;filter:blur(9px);--gd:5s;--gdl:1s;--go1:.07;--go2:.20"></div>
+  <div class="glow-dot" style="width:45px;height:45px;background:radial-gradient(circle,rgba(160,160,168,.9),transparent);top:68%;left:88%;filter:blur(11px);--gd:3.8s;--gdl:1.5s;--go1:.09;--go2:.24"></div>
+  <div class="glow-dot" style="width:40px;height:40px;background:radial-gradient(circle,rgba(208,206,200,.9),transparent);top:85%;left:40%;filter:blur(10px);--gd:4.5s;--gdl:.8s;--go1:.07;--go2:.22"></div>
+</div>
+
+
+  <!-- Small glow dots scattered -->
+  <div class="glow-dot" style="width:55px;height:55px;background:radial-gradient(circle,rgba(160,160,168,.9),transparent);top:8%;left:18%;filter:blur(12px);--gd:4s;--gdl:0s;--go1:.10;--go2:.28"></div>
+  <div class="glow-dot" style="width:45px;height:45px;background:radial-gradient(circle,rgba(208,206,200,.9),transparent);top:18%;left:70%;filter:blur(10px);--gd:3.5s;--gdl:.6s;--go1:.10;--go2:.26"></div>
+  <div class="glow-dot" style="width:40px;height:40px;background:radial-gradient(circle,rgba(232,228,220,.9),transparent);top:35%;left:8%;filter:blur(9px);--gd:5s;--gdl:1s;--go1:.08;--go2:.22"></div>
+  <div class="glow-dot" style="width:50px;height:50px;background:radial-gradient(circle,rgba(160,160,168,.9),transparent);top:50%;left:85%;filter:blur(11px);--gd:3.8s;--gdl:1.5s;--go1:.10;--go2:.28"></div>
+  <div class="glow-dot" style="width:42px;height:42px;background:radial-gradient(circle,rgba(208,206,200,.9),transparent);top:65%;left:35%;filter:blur(10px);--gd:4.5s;--gdl:.8s;--go1:.08;--go2:.24"></div>
+  <div class="glow-dot" style="width:48px;height:48px;background:radial-gradient(circle,rgba(232,228,220,.9),transparent);top:80%;left:72%;filter:blur(10px);--gd:3.2s;--gdl:2s;--go1:.10;--go2:.26"></div>
+  <div class="glow-dot" style="width:38px;height:38px;background:radial-gradient(circle,rgba(160,160,168,.9),transparent);top:92%;left:14%;filter:blur(9px);--gd:4.2s;--gdl:.3s;--go1:.08;--go2:.22"></div>
+
+  <!-- Sweeping strobe beams – 3 at different speeds/colors -->
+  <div class="strobe" style="width:110px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),rgba(255,255,255,.13),rgba(255,255,255,.06),transparent);--sd:6s;--sdl:0s"></div>
+  <div class="strobe" style="width:70px;background:linear-gradient(90deg,transparent,rgba(160,160,168,.10),rgba(255,255,255,.09),rgba(196,104,138,.08),transparent);--sd:8s;--sdl:2s"></div>
+  <div class="strobe" style="width:50px;background:linear-gradient(90deg,transparent,rgba(123,149,184,.14),rgba(255,255,255,.07),transparent);--sd:10s;--sdl:5s"></div>
+
+</div>
+
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">STUDENTFIXARNA™</a>
+  <ul class="nav-links">
+    <li><a href="#tjanster">Tjänster</a></li>
+    <li><a href="#lokaler">Lokaler</a></li>
+    <li><a href="#reviews">Omdömen</a></li>
+    <li><a href="#kontakt" class="nav-cta">Boka nu</a></li>
+  </ul>
+  <a href="#kontakt" class="nav-cta-mobile" onclick="closeMenu()">Boka nu</a>
+  <button class="nav-burger" id="burger" aria-label="Öppna meny" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#tjanster" onclick="closeMenu()">Tjänster</a>
+  <a href="#lokaler"  onclick="closeMenu()">Lokaler</a>
+  <a href="#reviews"  onclick="closeMenu()">Omdömen</a>
+  <a href="#hur"      onclick="closeMenu()">Hur det funkar</a>
+  <a href="#kontakt"  onclick="closeMenu()" class="cta-mob">Boka nu</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Hero-only orbs + strobe -->
+  <div class="hero-lights" aria-hidden="true">
+    <div class="hero-orb" style="width:300px;height:300px;background:radial-gradient(circle,rgba(160,160,168,.9) 0%,transparent 65%);top:-80px;left:-60px;filter:blur(50px);--dur:9s;--dl:0s;--o1:.20;--o2:.35;--mx:50px;--my:60px;--sc:1.2"></div>
+    <div class="hero-orb" style="width:280px;height:280px;background:radial-gradient(circle,rgba(208,206,200,.9) 0%,transparent 65%);top:-60px;right:-50px;filter:blur(48px);--dur:8s;--dl:1s;--o1:.18;--o2:.32;--mx:-60px;--my:50px;--sc:1.2"></div>
+    <div class="hero-orb" style="width:240px;height:240px;background:radial-gradient(circle,rgba(232,228,220,.9) 0%,transparent 65%);bottom:-40px;left:40%;filter:blur(45px);--dur:10s;--dl:1.5s;--o1:.16;--o2:.28;--mx:30px;--my:-30px;--sc:1.15"></div>
+    <div class="hero-strobe" style="width:110px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),rgba(255,255,255,.13),rgba(255,255,255,.06),transparent);--sd:6s;--sdl:0s"></div>
+    <div class="hero-strobe" style="width:70px;background:linear-gradient(90deg,transparent,rgba(160,160,168,.10),rgba(255,255,255,.09),rgba(196,104,138,.08),transparent);--sd:8s;--sdl:2s"></div>
+    <div class="hero-strobe" style="width:50px;background:linear-gradient(90deg,transparent,rgba(123,149,184,.14),rgba(255,255,255,.07),transparent);--sd:10s;--sdl:5s"></div>
+  </div>
+  <!-- Hero content -->
+  <div class="hero-content">
+  <div class="hero-pill"><span class="hero-dot"></span>Studentfixarna – Stockholm</div>
+  <h1>En grym student.<span class="grad-text">Klasskassan tackar.</span></h1>
+  <p class="hero-sub">Vi tar hand om allt. Ni behåller pengarna. Så enkelt är det.</p>
+  <div class="btns">
+    <a href="#kontakt" class="btn-main">Kom igång</a>
+    <a href="#hur" class="btn-sec">Hur funkar det?</a>
+  </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item"><span class="strip-dot sd-a"></span>Fast arvode</div>
+  <div class="strip-item"><span class="strip-dot sd-r"></span>All biljettvinst till er</div>
+  <div class="strip-item"><span class="strip-dot sd-s"></span>Ni säljer inget extra</div>
+  <div class="strip-item"><span class="strip-dot sd-g"></span>Vi fixar allt</div>
+</div>
+
+<!-- PITCH -->
+<section id="varfor">
+  <div class="inner pitch">
+    <div class="sec-label">Varför Studentfixarna</div>
+    <h2>Andra bolag tjänar på er.<br>Vi gör tvärtom.</h2>
+    <p class="pitch-sub">Vi startade Studentfixarna för att vi tröttnade på att studentfester mest gynnar eventbolagen. Hos oss går biljettintäkterna till klassen – inte till oss.</p>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <p>Av biljettintäkterna tillbaka till er klass</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Fast</div>
+        <p>Arvode – ni vet priset från dag ett</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">0 kr</div>
+        <p>Krav på att sälja tilläggsprodukter</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-bar"></div>
+      <div>
+        <h3>Ju fler biljetter ni säljer – desto större klasskassa</h3>
+        <p>
+När kostnaderna är täckta går all extra biljettförsäljning direkt till er klass.
+Hos många andra bolag tjänar de mer när ni säljer mer – hos oss tjänar ni mer när ni säljer mer.
+</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="tjanster" class="bg-alt" style="padding:2.5rem 1.5rem">
+  <div class="inner">
+    <div class="sec-label">Vad vi fixar</div>
+    <h2 style="font-size:clamp(1.2rem,3vw,1.8rem);margin-bottom:.6rem">Allt ni behöver. Inget ni inte behöver.</h2>
+    <div class="services-grid">
+      <div class="svc">
+        <span style="font-size:24px;display:block;margin-bottom:.75rem">🎓</span>
+        <h3>Studentskiva</h3>
+        <p>Rätt lokal, rätt vibe. Vi planerar hela festen – från lokal och mat till logistik och kvällens schema.</p>
+        <span class="svc-tag">Populärast</span>
+      </div>
+      <div class="svc">
+        <span style="font-size:24px;display:block;margin-bottom:.75rem">🚌</span>
+        <h3>Studentflak & transport</h3>
+        <p>Vi anordnar alla typer av transport – från klassisk studentflak och buss till båt på sjön eller helikopter. Vi sköter rutt, dekorationer och logistik.</p>
+        <span class="svc-tag">Studentdagen</span>
+      </div>
+      <div class="svc">
+        <span style="font-size:24px;display:block;margin-bottom:.75rem">🥂</span>
+        <h3>Champagnefrukost</h3>
+        <p>Slipp stressen på en av livets viktigaste dagar. Vi serverar frukost med bubbel och god mat – ni behöver inte lyfta ett finger.</p>
+        <span class="svc-tag">Studentmorgonen</span>
+      </div>
+      <div class="svc">
+        <span style="font-size:24px;display:block;margin-bottom:.75rem">🏡</span>
+        <h3>Privat studentmottagning</h3>
+        <p>Vi hjälper till med privata studentmottagningar på den stora dagen. Vi sköter lokal, mat och upplägg – ni är helt närvarande i stunden. Minimum 100 gäster.</p>
+        <span class="svc-tag">Min. 100 gäster</span>
+      </div>
+      <div class="svc">
+        <span style="font-size:24px;display:block;margin-bottom:.75rem">🎉</span>
+        <h3>Insparksfest</h3>
+        <p>Välkomna nya studenter med en fest att minnas. Vi fixar lokal, upplägg och allt däremellan – ni sätter stämningen för åren som komma skall.</p>
+        <span class="svc-tag">Inspark</span>
+      </div>
+      <div class="svc">
+        <span style="font-size:24px;display:block;margin-bottom:.75rem">⏳</span>
+        <h3>300–100-dagarsfesterna</h3>
+        <p>Markera varje milstolpe på vägen mot studenten. Vi hjälper er fira rätt längs hela resan – från 300 dagar kvar till den sista nerräkningen.</p>
+        <span class="svc-tag">Milstolpar</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VENUES -->
+<section id="lokaler">
+  <div class="inner">
+    <div class="sec-label">Lokaler & venues</div>
+    <h2>Vi hittar rätt lokal för er.</h2>
+    <p style="color:var(--text2);max-width:720px;font-size:1.05rem;line-height:2.1;margin-bottom:2.5rem;letter-spacing:.01em">
+      Vi samarbetar med ett brett nätverk av restauranger, venues och eventlokaler i Stockholm. Oavsett om ni vill ha en intim middag för 50 personer eller en fullskalig fest för flera hundra – vi matchar er med en lokal som passar klassens stil, budget och datum.
+    </p>
+    <div class="venue-feature-grid">
+      <div class="venue-feature">
+        <span style="font-size:24px;display:block;margin-bottom:.75rem">🍽️</span>
+        <h3>Restauranger & brasserie</h3>
+        <p>Från mysiga restauranger till stora brasserie-lokaler. Vi har tillgång till platser med allt från husmanskost till findining.</p>
+      </div>
+      <div class="venue-feature">
+        <span style="font-size:24px;display:block;margin-bottom:.75rem">🎵</span>
+        <h3>Nattklubb & festlokal</h3>
+        <p>Vill ni avsluta kvällen på dansgolvet? Vi samarbetar med venues med bra ljud, ljus och rätt stämning för studentfest.</p>
+      </div>
+      <div class="venue-feature">
+        <span style="font-size:24px;display:block;margin-bottom:.75rem">🌿</span>
+        <h3>Unika & exklusiva platser</h3>
+        <p>Takterrasser, sommarlokaler, historiska salar – vi hittar den där lokalen som gör er studentfest minnesvärd.</p>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:2rem">
+      <div class="callout-bar"></div>
+      <div>
+        <h3>Fler lokaler tillkommer löpande</h3>
+        <p>Vi bygger kontinuerligt ut vårt nätverk. Hör av er med era önskemål – antal gäster, datum och känsla – så presenterar vi alternativ som passar just er klass.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="bg-alt">
+  <div class="inner">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:.25rem;flex-wrap:wrap;gap:.5rem">
+      <div>
+        <div class="sec-label">Vad folk säger</div>
+        <h2 style="margin-bottom:0">Röster från klasser vi hjälpt.</h2>
+      </div>
+      <span class="scroll-hint-arrow" style="padding-bottom:.35rem">
+        Swipa för fler
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </span>
+    </div>
+    <div class="reviews-wrap">
+    <button class="scroll-btn prev" onclick="scrollReviews(-1)" aria-label="Föregående">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="scroll-btn next" onclick="scrollReviews(1)" aria-label="Nästa">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <div class="reviews-grid" id="reviews-grid">
+      <div class="review">
+        <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+        <q>Helt otroligt smidigt. Vi hade knappt ett möte och ändå blev allt perfekt. Klassen fick ihop mer pengar än vi räknat med.</q>
+        <div class="review-author">
+          <div class="review-avatar rav1">EA</div>
+          <div><div class="review-name">Ella A.</div><div class="review-meta">Klassansvarig,<br>NA-programmet 2024</div></div>
+        </div>
+      </div>
+      <div class="review">
+        <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+        <q>Vi hade testat ett annat bolag tidigare – det var inte ens nära. Studentfixarna svarade alltid snabbt och löste allt utan att vi behövde fråga.</q>
+        <div class="review-author">
+          <div class="review-avatar rav2">MK</div>
+          <div><div class="review-name">Marcus K.</div><div class="review-meta">Kassör,<br>Ekonomiprogrammet 2024</div></div>
+        </div>
+      </div>
+      <div class="review">
+        <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+        <q>Kontakten var helt klockren hela vägen. Aldrig orolig för att något skulle falla bort. Lokalen var en dröm och maten fantastisk.</q>
+        <div class="review-author">
+          <div class="review-avatar rav3">SL</div>
+          <div><div class="review-name">Sara L.</div><div class="review-meta">Klassansvarig,<br>SA-programmet 2024</div></div>
+        </div>
+      </div>
+      <div class="review">
+        <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+        <q>Klassen tjänade in nästan dubbelt mot vad vi trodde. Inga konstiga avgifter, inga säljkrav. Bara en grym student.</q>
+        <div class="review-author">
+          <div class="review-avatar rav4">JB</div>
+          <div><div class="review-name">Johan B.</div><div class="review-meta">Klassrepresentant,<br>TE-programmet 2023</div></div>
+        </div>
+      </div>
+      <div class="review">
+        <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+        <q>Biljetthanteringen var guld värd. Ingen som glömde betala, ingen som kassören behövde jaga. Pengarna var alltid räknade och redovisade. Allt bara fungerade.</q>
+        <div class="review-author">
+          <div class="review-avatar rav1">FR</div>
+          <div><div class="review-name">Filippa R.</div><div class="review-meta">Klassansvarig & kassör,<br>IB-programmet 2024</div></div>
+        </div>
+      </div>
+      <div class="review">
+        <div class="review-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+        <q>Vi visste inte ens vad vi ville ha – de kom med förslag, fixade lokalen och skötte allt. Vi behövde bara dyka upp och ha kul.</q>
+        <div class="review-author">
+          <div class="review-avatar rav3">AL</div>
+          <div><div class="review-name">Anton L.</div><div class="review-meta">Klassansvarig,<br>HU-programmet 2024</div></div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="hur">
+  <div class="inner">
+    <div class="sec-label">Hur det funkar</div>
+    <h2>Från idé till legendarisk student.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Ni hör av er</h3>
+          <p>Berätta om klassen, datum och vad ni drömmer om. Vi svarar inom 24h och bokar ett möte.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Vi tar fram ett upplägg</h3>
+          <p>Lokaler, mat, schema och ett fast pris. Ni vet exakt vad ni betalar – inga dolda kostnader.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Ni säljer biljetter</h3>
+          <p>All intäkt utöver vårt arvode går direkt till er. Ju mer ni säljer, desto fetare klassbudget.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Vi fixar resten</h3>
+          <p>Ni dyker upp och njuter. Vi ser till att allt är på plats, på tid och exakt som ni föreställt er.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="bg-alt" style="text-align:center">
+  <div class="inner">
+    <div class="sec-label">Priset</div>
+    <h2>Enkelt, ärligt, transparent.</h2>
+    <p style="color:var(--text2);max-width:680px;margin:.5rem auto 0;font-size:.95rem;line-height:1.75">
+      Vi tar ett fast arvode beroende på festens storlek. Allt utöver det – är ert.
+    </p>
+    <div class="pricing-cards">
+      <div class="pcard">
+        <div class="pcard-label">Vår ersättning</div>
+        <div class="pcard-val">Fast arvode</div>
+        <p>Inga provisioner, inga dolda påslag.</p>
+      </div>
+      <div class="pcard">
+        <div class="pcard-label">Er intäkt</div>
+        <div class="pcard-val">100% av<br>biljettintäkterna</div>
+        <p>All försäljning går tillbaka till klassen.</p>
+      </div>
+      <div class="pcard">
+        <div class="pcard-label">Krav på er</div>
+        <div class="pcard-val">Noll</div>
+        <p>Inga krav på att sälja tillägg eller andras produkter. Ni säljer bara biljetter.</p>
+      </div>
+    </div>
+    <p class="pricing-note" style="max-width:680px">Vill ni ha ett exakt prisförslag? Hör av er – vi räknar på just er fest utan förpliktelser.</p>
+  </div>
+</section>
+
+<!-- BILJETTER -->
+<section id="biljetter">
+  <div class="inner">
+    <div class="sec-label">Digital biljettförsäljning</div>
+    <h2>Inga Swish-listor.<br>Ingen stress.</h2>
+    <p style="color:var(--text2);max-width:780px;font-size:1.05rem;line-height:2.1;margin-bottom:2.5rem;letter-spacing:.01em">
+      Vi ersätter Swish-listor, kaos i Messenger och osäker betalning.
+
+All biljettförsäljning sker digitalt – så ni får full koll på både pengar och gäster i realtid.
+    </p>
+    <div class="stat-row" style="max-width:700px;margin:0 auto">
+      <div class="stat">
+        <div class="stat-num">0 kr</div>
+        <p>Pengar att hantera manuellt – allt sköts digitalt</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <p>Koll på ekonomin – all försäljning på ett ställe</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Noll</div>
+        <p>Svinn – digitala biljetter går inte att kopiera eller förlora</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:2rem">
+      <div class="svc">
+        <span style="font-size:24px;display:block;margin-bottom:.75rem">📱</span>
+        <h3>Digital inköp</h3>
+        <p>Gästerna köper biljetter online via en länk ni delar. Inget kontant, inget Swish fram och tillbaka.</p>
+      </div>
+      <div class="svc">
+        <span style="font-size:24px;display:block;margin-bottom:.75rem">📊</span>
+        <h3>Realtidsöversikt</h3>
+        <p>Ni ser löpande hur många biljetter som sålts och hur mycket pengar som är inne – live.</p>
+      </div>
+      <div class="svc">
+        <span style="font-size:24px;display:block;margin-bottom:.75rem">💸</span>
+        <h3>Pengarna till klassen</h3>
+        <p>Intäkterna samlas och betalas ut direkt till klassen. Transparent, enkelt och utan mellanhänder.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section id="kontakt">
+  <div class="contact-inner">
+    <div class="sec-label">Kom igång</div>
+    <h2>Redo att boka en student att minnas?</h2>
+    <p class="contact-intro" style="max-width:520px">Fyll i formuläret så hör vi av oss inom 24 timmar.</p>
+
+    <div class="form-card">
+      <div id="form-inner">
+        <form id="contact-form" action="https://formspree.io/f/mojrozwo" method="POST">
+          <div class="form-row">
+            <div class="field">
+              <label for="f-name">Namn<span class="req">*</span></label>
+              <input type="text" id="f-name" name="name" placeholder="Ditt namn" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="f-phone">Telefon<span class="req">*</span></label>
+              <input type="tel" id="f-phone" name="phone" placeholder="07X – XXX XX XX" autocomplete="tel" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-email">E-postadress<span class="req">*</span></label>
+            <input type="email" id="f-email" name="email" placeholder="din@mejl.se" autocomplete="email" required>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="f-school">Skola<span class="req">*</span></label>
+              <input type="text" id="f-school" name="school" placeholder="T.ex. Danderyds gymnasium" required>
+            </div>
+            <div class="field">
+              <label for="f-class">Klass / Program<span class="req">*</span></label>
+              <input type="text" id="f-class" name="class" placeholder="T.ex. NA3B, Ekonomi" required>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="field">
+            <label>Vad vill ni ha hjälp med?<span class="req">*</span></label>
+            <div class="checkboxes" id="checkboxes">
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Studentskiva"> <span>Studentskiva</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Studentflak & transporter"> <span>Studentflak & transporter</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Champagnefrukost"> <span>Champagnefrukost</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Inspark & 100-dagarsfesterna"> <span>Inspark & 100-dagarsfesterna</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="hjalp" value="Privat studentmottagning (min. 100 pers)"> <span>Privat studentmottagning<br><small style="color:var(--muted);font-weight:500">(minimum 100 pers)</small></span></label>
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:.5rem">
+            <label for="f-date">Ungefärligt datum</label>
+            <input type="text" id="f-date" name="datum" placeholder="T.ex. juni 2025, osäker ännu">
+          </div>
+
+          <div class="field">
+            <label for="f-message">Övrig info / önskemål</label>
+            <textarea id="f-message" name="meddelande" placeholder="Antal gäster, budget, specifika önskemål eller bara en hälsning..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Skicka förfrågan &nbsp;→</button>
+          <p class="privacy">Vi delar aldrig dina uppgifter med tredje part. Svarstid inom 24h.</p>
+        </form>
+      </div>
+
+      <div class="success-msg" id="success-msg">
+        <div class="success-icon">🎓</div>
+        <h3>Tack för er förfrågan!</h3>
+        <p>Vi hör av oss inom 24 timmar. Följ oss gärna på sociala medier tills dess!</p>
+        <div style="margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--border2)">
+          <p style="font-size:12px;color:var(--muted);margin-bottom:.75rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600">Följ oss på</p>
+          <div style="display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap">
+            <a href="https://www.instagram.com/studentfixarna.se" target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(115deg,#606068 0%,#D8D6D2 22%,#F2F0EC 40%,#A0A0A8 75%,#D0CEC8 100%);border:none;border-radius:0px;padding:.55rem 1.2rem;text-decoration:none;color:#080808;font-size:12.5px;font-weight:700;box-shadow:0 4px 18px rgba(160,160,168,.20)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+              Instagram
+            </a>
+            <a href="https://www.tiktok.com/@studentfixarna" target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(115deg,#606068 0%,#D8D6D2 22%,#F2F0EC 40%,#A0A0A8 75%,#D0CEC8 100%);border:none;border-radius:0px;padding:.55rem 1.2rem;text-decoration:none;color:#080808;font-size:12.5px;font-weight:700;box-shadow:0 4px 18px rgba(160,160,168,.20)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+              </svg>
+              TikTok
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIALS -->
+<div style="text-align:center;padding:3rem 1.5rem;background:var(--bg);border-top:1px solid var(--border)">
+  <p style="font-size:12px;color:var(--muted);margin-bottom:.75rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600">Följ oss på</p>
+  <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap">
+    <a href="https://www.instagram.com/studentfixarna.se" target="_blank" rel="noopener"
+       style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(115deg,#606068 0%,#D8D6D2 22%,#F2F0EC 40%,#A0A0A8 75%,#D0CEC8 100%);border:none;border-radius:0px;padding:.6rem 1.4rem;text-decoration:none;color:#080808;font-size:13px;font-weight:700;box-shadow:0 4px 18px rgba(160,160,168,.20);transition:opacity .15s,transform .15s"
+       onmouseover="this.style.opacity='.88';this.style.transform='translateY(-1px)'"
+       onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+      </svg>
+      Instagram
+    </a>
+    <a href="https://www.tiktok.com/@studentfixarna" target="_blank" rel="noopener"
+       style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(115deg,#606068 0%,#D8D6D2 22%,#F2F0EC 40%,#A0A0A8 75%,#D0CEC8 100%);border:none;border-radius:0px;padding:.6rem 1.4rem;text-decoration:none;color:#080808;font-size:13px;font-weight:700;box-shadow:0 4px 18px rgba(160,160,168,.20);transition:opacity .15s,transform .15s"
+       onmouseover="this.style.opacity='.88';this.style.transform='translateY(-1px)'"
+       onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+      </svg>
+      TikTok
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">STUDENTFIXARNA™</div>
+  <p style="margin-bottom:.75rem">Studentfester som gynnar klassen – inte festfixarna.</p>
+  <p>© 2026 Studentfixarna™ · Alla rättigheter reserverade.</p>
+</footer>
+
+<script>
+/* ── Nav ── */
+function toggleMenu() {
+  var m = document.getElementById('mobile-menu');
+  var b = document.getElementById('burger');
+  var isOpen = m.classList.toggle('open');
+  b.classList.toggle('open', isOpen);
+  b.setAttribute('aria-label', isOpen ? 'Stäng meny' : 'Öppna meny');
+}
+function closeMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('burger').classList.remove('open');
+}
+
+/* ── Formspree submit ── */
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var form = e.target;
+
+  var checked = form.querySelectorAll('input[name="hjalp"]:checked');
+  var cbWrap  = document.getElementById('checkboxes');
+  if (checked.length === 0) {
+    cbWrap.style.outline      = '1.5px solid #A0A0A8';
+    cbWrap.style.borderRadius = '8px';
+    cbWrap.style.padding      = '8px';
+    return;
+  }
+  cbWrap.style.outline = 'none';
+  cbWrap.style.padding = '0';
+
+  try {
+    var res = await fetch(form.action, {
+      method:  'POST',
+      body:    new FormData(form),
+      headers: { Accept: 'application/json' }
+    });
+    if (res.ok) {
+      document.getElementById('form-inner').style.display  = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    } else {
+      alert('Något gick fel. Försök igen eller maila oss direkt.');
+    }
+  } catch(err) {
+    alert('Något gick fel. Kontrollera din internetanslutning.');
+  }
+});
+
+document.querySelectorAll('input[name="hjalp"]').forEach(function(cb) {
+  cb.addEventListener('change', function() {
+    document.getElementById('checkboxes').style.outline = 'none';
+    document.getElementById('checkboxes').style.padding = '0';
+  });
+});
+
+function scrollReviews(dir) {
+  var grid = document.getElementById('reviews-grid');
+  var cardWidth = grid.querySelector('.review').offsetWidth + 20;
+  grid.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
