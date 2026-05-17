@@ -927,7 +927,8 @@ footer p { font-size: 12px; color: var(--muted); }
   .nav-links       { display: none; }
   .nav-burger      { display: flex; }
   .nav-cta-mobile  { display: inline-block; }
-  nav              { padding: .85rem 1.25rem; }
+  nav              { padding: .7rem 1rem; gap: .5rem; }
+  .nav-logo        { font-size: clamp(.65rem, 3vw, .9rem); }
 
   .hero { padding: 3.25rem 1.25rem 2.75rem; }
 
@@ -1258,10 +1259,10 @@ nav { z-index: 200; }
     <li><a href="#" onclick="openOmOss();return false;">Om oss</a></li>
     <li><a href="#kontakt" class="nav-cta">Boka nu</a></li>
   </ul>
+  <a href="#kontakt" class="nav-cta-mobile" onclick="closeMenu()">Boka nu</a>
   <button class="nav-burger" id="burger" aria-label="Öppna meny" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>
-  <a href="#kontakt" class="nav-cta-mobile" onclick="closeMenu()">Boka nu</a>
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
