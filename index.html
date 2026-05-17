@@ -1143,6 +1143,73 @@ nav { z-index: 200; }
   100% { transform: translateX(-50%); }
 }
 
+
+/* ── OM OSS MODAL ── */
+.om-oss-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s;
+}
+.om-oss-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.om-oss-modal {
+  background: #0E0C0A;
+  border: 1px solid var(--border2);
+  border-radius: 0px;
+  max-width: 640px;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0,0,0,.6);
+  transform: translateY(20px);
+  transition: transform .25s;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.om-oss-overlay.open .om-oss-modal {
+  transform: translateY(0);
+}
+.om-oss-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  transition: border-color .2s, color .2s;
+}
+.om-oss-close:hover { border-color: var(--border3); color: var(--text); }
+.om-oss-modal .sec-label { display: block; margin-bottom: .5rem; }
+.om-oss-modal h2 { font-size: clamp(1.3rem, 4vw, 1.8rem); margin-bottom: 1.25rem; }
+.om-oss-modal p { font-size: 14.5px; color: var(--text2); line-height: 1.8; margin-bottom: 1rem; }
+.om-oss-modal p:last-child { margin-bottom: 0; }
+.om-oss-modal strong { color: var(--text); font-weight: 700; }
+.om-oss-bar {
+  width: 40px; height: 3px;
+  background: var(--grad);
+  margin-bottom: 1.5rem;
+}
+
 </style>
 </head>
 <body>
@@ -1188,6 +1255,7 @@ nav { z-index: 200; }
     <li><a href="#tjanster">Tjänster</a></li>
     <li><a href="#lokaler">Lokaler</a></li>
     <li><a href="#reviews">Omdömen</a></li>
+    <li><a href="#" onclick="openOmOss();return false;">Om oss</a></li>
     <li><a href="#kontakt" class="nav-cta">Boka nu</a></li>
   </ul>
   <a href="#kontakt" class="nav-cta-mobile" onclick="closeMenu()">Boka nu</a>
@@ -1201,6 +1269,7 @@ nav { z-index: 200; }
   <a href="#lokaler"  onclick="closeMenu()">Lokaler</a>
   <a href="#reviews"  onclick="closeMenu()">Omdömen</a>
   <a href="#hur"      onclick="closeMenu()">Hur det funkar</a>
+  <a href="#" onclick="openOmOss();closeMenu();return false;">Om oss</a>
   <a href="#kontakt"  onclick="closeMenu()" class="cta-mob">Boka nu</a>
 </div>
 
@@ -1753,6 +1822,38 @@ function scrollReviews(dir) {
   var cardWidth = grid.querySelector('.review').offsetWidth + 20;
   grid.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
 }
+
+function openOmOss() {
+  document.getElementById('om-oss-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeOmOss() {
+  document.getElementById('om-oss-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('om-oss-overlay')) closeOmOss();
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeOmOss();
+});
+
 </script>
+
+<!-- OM OSS MODAL -->
+<div class="om-oss-overlay" id="om-oss-overlay" onclick="handleOverlayClick(event)">
+  <div class="om-oss-modal">
+    <button class="om-oss-close" onclick="closeOmOss()" aria-label="Stäng">×</button>
+    <div class="sec-label">Om oss</div>
+    <h2>Därför startade vi Studentfixarna.</h2>
+    <div class="om-oss-bar"></div>
+    <p><strong>Studentfixarna grundades av Leone och Chiara Cantavenera</strong> – två syskon som mitt under planeringen av sina egna studentfiranden insåg hur snett det hade blivit.</p>
+    <p>Klasser skrivs upp på avtal de inte förstår. Upplägg som ser bra ut på ytan döljer att nästan hälften av alla intäkter – utöver de faktiska kostnaderna – går direkt till eventbolagen. Det som ska vara årets roligaste tid präglas istället av ekonomisk stress, påtryckningar att sälja mer och en snurra som är designad för att gynna alla utom klassen.</p>
+    <p>Leone och Chiara har jobbat inom hotell, restaurang och event sedan de var 14 år. De vet hur branschen fungerar – inifrån. Bakom dem finns en hel familj som är aktiv inom event, restaurang och leverantörssidan. Kunskapen, kontakterna och nätverket finns redan på plats.</p>
+    <p>Målet är enkelt: studenten ska vara rolig, till ett rimligt pris och med avtal som faktiskt gynnar klassen.</p>
+    <p><strong>Hos oss tjänar klassen pengar. Inte vi.</strong></p>
+  </div>
+</div>
+
 </body>
 </html>
