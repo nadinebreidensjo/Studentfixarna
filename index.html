@@ -1211,6 +1211,94 @@ nav { z-index: 200; }
   margin-bottom: 1.5rem;
 }
 
+
+/* ── EKONOMI MODAL ── */
+.ekonomi-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s;
+}
+.ekonomi-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.ekonomi-modal {
+  background: #0E0C0A;
+  border: 1px solid var(--border2);
+  border-radius: 0px;
+  max-width: 640px;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0,0,0,.6);
+  transform: translateY(20px);
+  transition: transform .25s;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+.ekonomi-overlay.open .ekonomi-modal { transform: translateY(0); }
+.ekonomi-close {
+  position: absolute;
+  top: 1.25rem; right: 1.25rem;
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 18px; line-height: 1;
+  transition: border-color .2s, color .2s;
+}
+.ekonomi-close:hover { border-color: var(--border3); color: var(--text); }
+.ekonomi-modal h3 {
+  font-family: "Syne", sans-serif;
+  font-size: 1rem; font-weight: 700;
+  color: var(--text); margin: 1.25rem 0 .4rem;
+}
+.ekonomi-modal h3:first-of-type { margin-top: 0; }
+.ekonomi-modal p {
+  font-size: 13.5px; color: var(--text2);
+  line-height: 1.75; margin-bottom: .6rem;
+}
+.ekonomi-modal ul {
+  margin: .4rem 0 .75rem 1.1rem;
+  display: flex; flex-direction: column; gap: .3rem;
+}
+.ekonomi-modal ul li {
+  font-size: 13.5px; color: var(--text2); line-height: 1.65;
+}
+.ekonomi-modal .e-bar {
+  width: 40px; height: 3px;
+  background: var(--grad); margin-bottom: 1.5rem;
+}
+.ekonomi-modal .e-note {
+  background: rgba(255,240,220,.04);
+  border: 1px solid var(--border2);
+  padding: 1rem 1.25rem;
+  margin-top: 1rem;
+}
+.ekonomi-modal .e-note p { margin-bottom: 0; color: var(--muted); }
+.ekonomi-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600;
+  color: var(--muted); cursor: pointer;
+  background: transparent; border: none;
+  padding: 0; margin-top: 1.25rem;
+  transition: color .2s;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.ekonomi-link:hover { color: var(--text); }
+
 </style>
 </head>
 <body>
@@ -1592,6 +1680,9 @@ Hos många andra bolag tjänar de mer när ni säljer mer – hos oss tjänar ni
       </div>
     </div>
     <p class="pricing-note" style="max-width:680px">Vill ni ha ett exakt prisförslag? Hör av er – vi räknar på just er fest utan förpliktelser.</p>
+    <div style="text-align:center;margin-top:1.25rem">
+      <button class="ekonomi-link" onclick="openEkonomi()">Hur fungerar ekonomin? →</button>
+    </div>
   </div>
 </section>
 
@@ -1599,6 +1690,7 @@ Hos många andra bolag tjänar de mer när ni säljer mer – hos oss tjänar ni
 <section id="biljetter">
   <div class="inner">
     <div class="sec-label">Digital biljettförsäljning</div>
+    <span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border2);padding:.15rem .6rem;margin-bottom:.5rem">Kommer snart</span>
     <h2>Inga Swish-listor.<br>Ingen stress.</h2>
     <p style="color:var(--text2);max-width:780px;font-size:1.05rem;line-height:2.1;margin-bottom:2.5rem;letter-spacing:.01em">
       Vi ersätter Swish-listor, kaos i Messenger och osäker betalning.
@@ -1835,11 +1927,61 @@ function closeOmOss() {
 function handleOverlayClick(e) {
   if (e.target === document.getElementById('om-oss-overlay')) closeOmOss();
 }
+
+function openEkonomi() {
+  document.getElementById('ekonomi-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeEkonomi() {
+  document.getElementById('ekonomi-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleEkonomiClick(e) {
+  if (e.target === document.getElementById('ekonomi-overlay')) closeEkonomi();
+}
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeOmOss();
+  if (e.key === 'Escape') { closeEkonomi(); closeOmOss(); }
 });
 
+
 </script>
+
+
+<!-- EKONOMI MODAL -->
+<div class="ekonomi-overlay" id="ekonomi-overlay" onclick="handleEkonomiClick(event)">
+  <div class="ekonomi-modal">
+    <button class="ekonomi-close" onclick="closeEkonomi()" aria-label="Stäng">×</button>
+    <div class="sec-label">Transparens</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.2rem,4vw,1.6rem);font-weight:800;color:var(--text);margin-bottom:.5rem">Hur fungerar ekonomin?</h2>
+    <div class="e-bar"></div>
+
+    <h3>Innan festen</h3>
+    <p>Försäljningen av eftersläppsbiljetter fungerar som en säkerhet för att täcka:</p>
+    <ul>
+      <li>Lokalens minimum spend i baren</li>
+      <li>Samt vårt fasta arvode</li>
+    </ul>
+    <p>Det gör att klassen slipper oväntade kostnader efter eventet.</p>
+
+    <h3>Under festen</h3>
+    <p>Under kvällen sammanställs den totala försäljningen i baren.</p>
+
+    <h3>Om minimum spend uppnås</h3>
+    <p>Om gästerna handlar för minimum spend eller mer i baren:</p>
+    <ul>
+      <li>Dras inga pengar från biljettförsäljningen för att täcka baren</li>
+      <li>Endast vårt fasta arvode regleras</li>
+      <li>Resterande överskott tillfaller klassen</li>
+    </ul>
+
+    <h3>Om minimum spend inte uppnås</h3>
+    <p>Om barförsäljningen inte når upp till minimum spend täcks mellanskillnaden av intäkterna från eftersläppsbiljetterna. Resterande överskott efter detta tillfaller klassen.</p>
+
+    <div class="e-note">
+      <p><strong style="color:var(--text2)">Viktigt att veta –</strong> Om biljettförsäljningen och barförsäljningen tillsammans inte täcker minimum spend och fasta kostnader kan ett underskott uppstå som klassen ansvarar för. Vi arbetar därför tillsammans med klassen kring prissättning, biljettstrategi, dryckespaket och marknadsföring – för att minimera risk och maximera klassens vinst.</p>
+    </div>
+  </div>
+</div>
 
 <!-- OM OSS MODAL -->
 <div class="om-oss-overlay" id="om-oss-overlay" onclick="handleOverlayClick(event)">
