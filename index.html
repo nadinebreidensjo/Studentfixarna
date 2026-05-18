@@ -20,12 +20,11 @@
 }
 
 html, body {
-  height: 100%;
+  min-height: 100%;
   font-family: 'Plus Jakarta Sans', sans-serif;
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
-  overflow: hidden;
 }
 
 /* Page lights */
@@ -50,13 +49,13 @@ html, body {
 main {
   position: relative;
   z-index: 1;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 2rem 1.5rem;
+  padding: 3rem 1.5rem 2rem;
 }
 
 .logo {
@@ -169,13 +168,11 @@ h1 {
 
 /* Footer */
 footer {
-  position: fixed;
-  bottom: 1.5rem;
-  left: 0; right: 0;
+  position: relative;
   text-align: center;
   font-size: 11px;
   color: var(--muted);
-  z-index: 1;
+  margin-top: 2rem;
   animation: fadeUp .8s .6s ease both;
 }
 
@@ -184,9 +181,7 @@ footer {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 480px) {
-  .socials { flex-direction: column; align-items: center; }
-}
+
 </style>
 </head>
 <body>
@@ -209,7 +204,7 @@ footer {
 
   <div class="divider"></div>
 
-  <p class="contact">Nyfiken redan nu? <a href="mailto:studentfixarnase@gmail.com">Hör av er</a></p>
+  <p class="contact">Nyfiken redan nu? <a href="mailto:hej@studentfixarna.se">Hör av er</a></p>
 
   <div class="socials">
     <a href="https://www.instagram.com/studentfixarna.se" target="_blank" rel="noopener" class="social-btn">
